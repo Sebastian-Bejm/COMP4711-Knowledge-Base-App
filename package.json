@@ -1,0 +1,17 @@
+{
+  "name": "comp4711project",
+  "version": "1.0.0",
+  "description": "final project for comp4711, knowledge base app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "teamA",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "express-handlebars": "^3.1.0",
+    "mysql2": "^2.1.0"
+  }
+}
