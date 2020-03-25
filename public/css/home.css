@@ -1,0 +1,61 @@
+#main-container {
+    display: flex;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 5%;
+}
+
+#kb-left-container {
+    margin-right: 4%;
+}
+
+#kb-right-container {
+    margin-left: 4%;
+}
+
+#kb-title {
+    
+}
+
+#kb-img {
+    min-width: 250px;
+    max-width: 350px;
+}
+
+#kb-login-form input {
+    margin-left: 3px;
+    margin-right: 3px;
+}
+
+#kb-login-form input[type="text"] {
+    padding: 3px;
+}
+
+#kb-login-form input[type="submit"] {
+    padding: 5px;
+    color: white;
+    background-color: mediumslateblue;
+    border-color: mediumslateblue;
+}
+
+#kb-signup {
+    
+}
+
+#kb-signup-form input {
+    margin: 6px 3px 6px 3px;
+    width: 100%;
+}
+
+#kb-signup-form input[type="text"] {
+    padding: 3px;
+}
+
+#kb-signup-form input[type="submit"] {
+    margin-left: 10px;
+    text-align: center;
+    padding: 5px;
+    color: white;
+    background-color: mediumslateblue;
+    border-color: mediumslateblue;
+}

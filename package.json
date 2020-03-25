@@ -13,5 +13,13 @@
     "express": "^4.17.1",
     "express-handlebars": "^3.1.0",
     "mysql2": "^2.1.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Adamsmith6300/COMP4711-project.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Adamsmith6300/COMP4711-project/issues"
+  },
+  "homepage": "https://github.com/Adamsmith6300/COMP4711-project#readme"
 }
