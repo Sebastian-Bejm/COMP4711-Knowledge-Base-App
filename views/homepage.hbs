@@ -1,4 +1,3 @@
-
 <div id="main-container">
 
     <div id="kb-left-container">
@@ -8,31 +7,29 @@
         <div id="kb-image-container">
             <img id="kb-img" src="/images/hand-holding-bunch-books-with-apple-top_1325-646.jpg"/>
         </div>
-
     </div>
+
     <div id="kb-right-container">
         <div id="kb-login">
-            <form id="kb-login-form">
-                <input type="text" name="email" placeholder="Email">
-                <input type="text" name="pass" placeholder="Password">
+            <form id="kb-login-form" action="/login" method="GET">
+                <input type="text" name="l_email" placeholder="Email">
+                <input type="text" name="l_pass" placeholder="Password">
                 <input type="submit" value="Login">
             </form>
         </div>
         <div id="kb-signup">
-            <h1>Join the worlds largest<br>
-                community for knowledge<br>
-                sharing
-            </h1>
-            <form id="kb-signup-form">
-                <input type="text" placeholder="Firstname">
-                <input type="text" placeholder="Lastname">
-                <input type="text" placeholder="Email">
-                <input type="text" placeholder="Password">
-                <input type="text" placeholder="Confirm Password">
+            <div id="kb-desc">
+                <h1>Join the worlds largest community for knowledge sharing</h1>
+            </div>  
+            <form id="kb-signup-form" action="/signup" method="POST">
+                <input type="text" name="s_fName" placeholder="Firstname">
+                <input type="text" name="s_lName" placeholder="Lastname">
+                <input type="text" name="s_email" placeholder="Email">
+                <input type="text" name="s_pass" placeholder="Password">
+                <input type="text" name="s_confirmPass" placeholder="Confirm Password">
                 <input type="submit" value="Signup">
             </form>
         </div>
-
     </div>
 
 </div>

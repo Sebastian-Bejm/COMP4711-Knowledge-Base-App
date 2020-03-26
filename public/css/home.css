@@ -1,50 +1,65 @@
+
+/* Homepage (login/signup) CSS */
+
 #main-container {
+    height: 100%;
     display: flex;
-    margin-left: 5%;
-    margin-right: 5%;
-    margin-top: 5%;
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-top: 75px;
 }
 
 #kb-left-container {
-    margin-right: 4%;
+    margin-right: 6%;
 }
 
 #kb-right-container {
-    margin-left: 4%;
-}
-
-#kb-title {
-    
+    margin-left: 6%;
 }
 
 #kb-img {
-    min-width: 250px;
-    max-width: 350px;
+    max-width: 360px;
+}
+
+#kb-login {
+    width: 100%;
 }
 
 #kb-login-form input {
-    margin-left: 3px;
-    margin-right: 3px;
+    margin: 3px;
 }
 
 #kb-login-form input[type="text"] {
+    width: 135px;
     padding: 3px;
 }
 
 #kb-login-form input[type="submit"] {
+    width: 60px;
     padding: 5px;
     color: white;
     background-color: mediumslateblue;
     border-color: mediumslateblue;
 }
 
-#kb-signup {
-    
+#kb-login-form input[type="submit"]:hover {
+    color: mediumslateblue;
+    background-color: white;
+    border-color: mediumslateblue;
+}
+
+#kb-desc {
+    margin-top: 40px;
+    margin-bottom: -10px;
+}
+
+#kb-signup-form {
+    max-width: 280px;
 }
 
 #kb-signup-form input {
-    margin: 6px 3px 6px 3px;
-    width: 100%;
+    margin: 7px 3px 7px 3px;
+    width: 95%;
 }
 
 #kb-signup-form input[type="text"] {
@@ -57,5 +72,57 @@
     padding: 5px;
     color: white;
     background-color: mediumslateblue;
+    border-color: mediumslateblue;
+}
+
+#kb-signup-form input[type="submit"]:hover {
+    color: mediumslateblue;
+    background-color: white;
+    border-color: mediumslateblue;
+}
+
+/* CSS related to the registerDetails view, uses some of the container css from home view */
+
+#kb-info {
+    max-width: 75%;
+    min-width: 40%;
+}
+
+#kb-info h2 {
+    font-size: 38pt;
+}
+
+#kb-regis {
+    margin-top: 80px;
+}
+
+#kb-regis-form input {
+    margin: 7px 3px 7px 3px;
+    width: 95%;
+}
+
+#kb-regis-form input[type="text"] {
+    padding: 3px;
+}
+
+textarea {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 97%;
+    resize: none;
+}
+
+#kb-regis-form input[type="submit"] {
+    margin-left: 10px;
+    text-align: center;
+    padding: 5px;
+    color: white;
+    background-color: mediumslateblue;
+    border-color: mediumslateblue;
+}
+
+#kb-regis-form input[type="submit"]:hover {
+    color: mediumslateblue;
+    background-color: white;
     border-color: mediumslateblue;
 }
