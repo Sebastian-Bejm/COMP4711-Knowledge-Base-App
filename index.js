@@ -25,7 +25,7 @@ app.set('views', 'views');
 
 
 app.get("/", (req,res)=>{
-  res.render("homepage",{});
+  res.render("homepage", {homeCSS: true});
 })
 
 
