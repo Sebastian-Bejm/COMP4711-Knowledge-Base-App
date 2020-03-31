@@ -1,10 +1,12 @@
-// const mysql = require('mysql2');
+const mysql = require('mysql2');
 
-// const pool = mysql.createPool({
-//     host: 'localhost',
-//     user: 'root',
-//     database: 'comp4711project',
-//     password: 'password'
-// });
+// url:  mysql://bf02fe50141e00:863bb7b4@us-cdbr-iron-east-01.cleardb.net/heroku_11bab956933f1d3?reconnect=true
 
-// module.exports = pool.promise();
+const pool = mysql.createPool({
+    host: 'us-cdbr-iron-east-01.cleardb.net',
+    user: 'bf02fe50141e00',
+    database: 'heroku_11bab956933f1d3',
+    password: '863bb7b4'
+});
+
+module.exports = pool.promise();
