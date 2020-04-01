@@ -1,4 +1,4 @@
-/** CSS for results shown, migrate to another file if neccessary later on */
+/** CSS for a single result */
 
 #single-result {
     display: block;
@@ -90,36 +90,4 @@
 
 #num-replies button:hover {
     outline-style: solid;
-}
-
-/** CSS for replies, migrate later */
-
-#replies {
-    margin-left: 10%;
-    margin-right: 10%;
-}
-
-.reply {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    display: flex;
-}
-
-.rep-pfp {
-    display: inline-flex;
-}
-
-.rep-pfp img {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    border-color: aliceblue;
-    border-width: 2px;
-    border: 2px solid lightgray;
-}
-
-.rep-msg {
-    text-align: center;
-    display: inline-block;
-    width: 81%;
 }
