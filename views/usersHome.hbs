@@ -1,4 +1,90 @@
-<div>
+<div id="home-section">
+    <div id="home-left">
+        <div class="img">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Gull_portrait_ca_usa.jpg">
+        </div>
+        <div id="user-info">
+            <p id="name">{{user.firstname}} {{user.lastname}}</p>
+            <p id="user-desc">-User description-</p>
+        </div>
+        <div id="statistics">
+            <div><!-- post message likes area-->
+                <div id="stat-name">
+                    <p><span>Posts</span></p>
+                    <p><span>Messages</span></p>
+                    <p>Likes</p>
+                </div>
+                
+                <div id="stat-count">
+                    <p>{{user.postcount}}</p>
+                    <p>{{user.messagecount}}</p>
+                    <p>{{user.likes}}</p>
+                </div>
+            </div>
+            
+            <div>
+                <p>Edit Profile</p>
+            </div>
+        </div><!-- end of statistics -->
+    </div><!-- end of home-left -->
+    
+    <div id="home-right">
+        <p>What's your question today?</p>
+        <form id="question-form" action="/addquestion" method="POST">
+            <div id="typing-area">
+                <input type="text" maxLength="40" placeholder="Subject" name="subject" required>
+                <input type="text" placeholder="Explain in detail..." name="desc" required>
+            </div>
+            
+            <div id="posting-area">
+                <div class="language-select">
+                    <select>
+                        <option value="0">Topic</option>
+                        <option value="1">html</option>
+                        <option value="2">java</option>
+                        <option value="3">c</option>
+                        <option value="4">php</option>
+                    </select>
+                </div><!-- end of language-select -->
+                
+                <div>
+                    <input id="post-button" type="submit" value="Post to timeline">
+                </div>
+            </div><!-- end of posting-area -->
+        </form><!-- end of question-form -->
+        
+        <div id="search-section">
+            <div>
+                <p>Search by topic</p>
+            </div>
+            
+            <div class="language-select">
+                <select>
+                    <option value="0">Topic</option>
+                    <option value="1">html</option>
+                    <option value="2">java</option>
+                    <option value="3">c</option>
+                    <option value="4">php</option>
+                </select>
+            </div><!-- end of language-select -->
+            <div>
+                <button id="search button">go-></button>
+            </div>
+        </div><!-- end of search-section -->
+        
+        <div id="discussion-area">
+            <div>
+                <p>Latest discussions</p>
+            </div>
+            <div>
+                <!------------ All the single messages are grouped here ------------->
+            </div>
+        </div><!-- end of discussion-area -->
+    </div><!-- end of home-right -->
+</div><!-- end of home-section -->
+
+
+<!--<div>
     <p>firstName:{{user.firstname}}</p>
     <p>lastName:{{user.lastname}}</p>
     <p>email:{{user.email}}</p>
@@ -9,5 +95,4 @@
     <p>posts:{{user.postcount}}</p>
     <p>messages:{{user.messagecount}}</p>
     <p>likes:{{user.likes}}</p>
-
-</div>
+</div>-->
