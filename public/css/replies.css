@@ -1,0 +1,49 @@
+/** CSS for replies from a result */
+
+#replies {
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.reply {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex;
+}
+
+.rep-pfp {
+    display: inline-flex;
+}
+
+.rep-pfp img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border-color: aliceblue;
+    border-width: 2px;
+    border: 2px solid lightgray;
+}
+
+.rep-msg {
+    text-align: center;
+    display: inline-block;
+    width: 81%;
+}
+
+#reply-form {
+    margin-left: 10%;
+    margin-right: 10%;
+    text-align: right;
+}
+
+#reply-form textarea {
+    resize: none;
+}
+
+#reply-form input[type="submit"] {
+    text-align: center;
+    padding: 5px;
+    color: white;
+    background-color: mediumslateblue;
+    border-color: mediumslateblue;
+}

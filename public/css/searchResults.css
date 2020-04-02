@@ -1,0 +1,125 @@
+/** CSS for results shown, migrate to another file if neccessary later on */
+
+#single-result {
+    display: block;
+    margin-left: 30%;
+    margin-right: 30%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 470px;
+    height: auto;
+    padding: 4px;
+}
+
+#pfp {
+    float: left;
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+#pfp img {
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    border-color: aliceblue;
+    border-width: 2px;
+    border: 2px solid lightgray;
+}
+
+#result {
+    display: inline-block;
+    width: 79%;
+    margin-left: 8px;
+}
+
+#msg-title {
+    display: inline-block;
+    width: 75%;
+}
+
+#msg-title p {
+    margin: 5px;
+}
+
+#topic {
+    display: inline-block;
+    width: 22%;
+    background-color: white;
+    color: lightskyblue;
+    text-align: center;
+}
+
+#topic p {
+    border: 1px solid lightskyblue;
+    margin: 5px;
+}
+
+#msg-desc {
+    width: 99%;
+    text-align: center;
+}
+
+#msg-desc p {
+    margin: 12px 2px 12px 2px;
+}
+
+#date-posted {
+    width: 49%;
+    display: inline-block;
+}
+
+#date-posted p {
+    margin: 5px 15px 5px 15px;
+    text-align: left;
+}
+
+#num-replies {
+    text-align: right;
+    width: 48%;
+    display: inline-block;
+}
+
+#num-replies button {
+    margin: 5px 15px 5px 15px;
+    text-align: right;
+    background-color: white;
+    border: 1px solid white;
+}
+
+#num-replies button:hover {
+    outline-style: solid;
+}
+
+/** CSS for replies, migrate later */
+
+#replies {
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.reply {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex;
+}
+
+.rep-pfp {
+    display: inline-flex;
+}
+
+.rep-pfp img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border-color: aliceblue;
+    border-width: 2px;
+    border: 2px solid lightgray;
+}
+
+.rep-msg {
+    text-align: center;
+    display: inline-block;
+    width: 81%;
+}
