@@ -1,7 +1,5 @@
 let db = require('../util/db');
 
-
-
 exports.createUser = (data) => {
     let sql = `Insert into user (firstname, lastname, email, password) values (
         '${data.firstname}',

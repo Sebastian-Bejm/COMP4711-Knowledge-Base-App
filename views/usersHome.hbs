@@ -1,7 +1,7 @@
 <div id="home-section">
     <div id="home-left">
-        <div class="img">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Gull_portrait_ca_usa.jpg">
+        <div >
+            <img class="img-profile" src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Gull_portrait_ca_usa.jpg">
         </div>
         <div id="user-info">
             <p id="name">{{user.firstname}} {{user.lastname}}</p>
@@ -30,20 +30,19 @@
     
     <div id="home-right">
         <p>What's your question today?</p>
-        <form id="question-form" action="/addquestion" method="POST">
+        <form id="question-form" action="/user/{{user.id}}/post" method="POST">
             <div id="typing-area">
-                <input type="text" maxLength="40" placeholder="Subject" name="subject" required>
-                <input type="text" placeholder="Explain in detail..." name="desc" required>
+                <input  name="heading" type="text" maxLength="40" placeholder="Subject" required>
+                <textarea name="details" type="text" placeholder="Explain in detail..." cols="60" rows="8" required></textarea>
             </div>
             
             <div id="posting-area">
                 <div class="language-select">
-                    <select>
-                        <option value="0">Topic</option>
-                        <option value="1">html</option>
-                        <option value="2">java</option>
-                        <option value="3">c</option>
-                        <option value="4">php</option>
+                    <select name="category" required>
+                        <option value="" disabled selected>Topic</option>
+                        {{#each categories}}
+                            <option value={{this.id}}>{{this.title}}</option>
+                        {{/each}}
                     </select>
                 </div><!-- end of language-select -->
                 
@@ -77,6 +76,15 @@
                 <p>Latest discussions</p>
             </div>
             <div>
+                {{#each latestPosts}}
+                    <div>
+                        <img src={{this.imageurl}} />
+                        <p>{{this.category}}</p>
+                        <p>{{this.heading}}</p>
+                        <p>{{this.details}}</p>
+                        <p>{{this.replycount}}</p>
+                    </div>
+                {{/each}}
                 <!------------ All the single messages are grouped here ------------->
             </div>
         </div><!-- end of discussion-area -->

@@ -12,10 +12,10 @@
     <div id="kb-right-container">
         <div id="kb-regis">
             <form id="kb-regis-form" action="/register" method="POST">
-                <input type="text" name="r_imageURL" placeholder="Image URL">
-                <textarea name="r_about" cols="60" rows="8" placeholder="A few lines about yourself"></textarea>
-                <input type="text" name="r_country" placeholder="Country">
-                <input type="text" name="r_birth" placeholder="Date of birth (mm/dd/yyyy)">
+                <input type="text" name="r_imageURL" placeholder="Image URL" required>
+                <textarea name="r_about" cols="60" rows="8" placeholder="A few lines about yourself" required></textarea>
+                <input type="text" name="r_country" placeholder="Country" required>
+                <input type="date" name="r_birth" placeholder="Date of birth (yyy/mm/dd)" required>
                 <input type="submit" value="Complete Registration">
             </form>
         </div>

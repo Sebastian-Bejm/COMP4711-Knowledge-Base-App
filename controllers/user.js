@@ -1,6 +1,5 @@
 let userModel = require('../models/user');
-
-
+const postController = require('./post');
 
 exports.createUser = (req,res,next) => {
     //NEED TO CHECK BOTH CONFIRM AND PASS MATCH
@@ -28,8 +27,20 @@ exports.createUser = (req,res,next) => {
 exports.getRegister = (req,res,next)=>{
     res.render('registerDetails', {homeCSS: true});
 }
-exports.getUserHome = (req,res,next)=>{
-    res.render('usersHome', {homeCSS: true, user: req.session.user });
+exports.getUserHome = async (req,res,next) => {
+    let [categories, fieldData] = await postController.getCategories();
+    let [latestPosts, metaData] = await postController.getLatestPosts({user_id: req.session.user.id, step: 0});
+    latestPosts = latestPosts.map(post=>{
+        let cat = categories.find(cat => cat.id == post.category_id);
+        return {
+            ...post,
+            category: cat.title
+        }
+    })
+    req.session.latestPosts = {
+        step: 0
+    };
+    res.render('usersHome', {usersHomeCSS: true, user: req.session.user, categories: categories, latestPosts: latestPosts });
 }
 
 exports.register = (req, res, next) => {

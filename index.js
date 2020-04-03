@@ -23,13 +23,11 @@ app.engine(
 app.set('view engine', 'hbs');
 app.set('views', 'views');
 
-
 app.use(session({
     secret:'superdupersecretkeynooneknows',// used to encrypt/sign the session id
-    resave: true,
+    resave: false,
     saveUninitialized: true
 }));
-
 
 app.get("/", (req,res)=>{
   res.render("homepage", {homeCSS: true});
@@ -37,13 +35,10 @@ app.get("/", (req,res)=>{
 
 
 let userRoutes = require('./routes/user');
-
-
+let postRoutes = require('./routes/post');
 
 app.use(userRoutes);
-
-
-
+app.use(postRoutes);
 
 
 
