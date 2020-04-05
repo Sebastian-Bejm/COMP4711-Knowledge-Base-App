@@ -1,4 +1,5 @@
 let userModel = require('../models/user');
+let postModel = require('../models/post');
 const postController = require('./post');
 
 exports.createUser = (req,res,next) => {
@@ -18,7 +19,7 @@ exports.createUser = (req,res,next) => {
                 ...rows[0],
                 ...newUser
             }
-            req.session.cookie.maxAge = 600000; 
+            req.session.cookie.maxAge = 3600000; 
             res.redirect(301, "/register")
         })
     });
@@ -27,16 +28,24 @@ exports.createUser = (req,res,next) => {
 exports.getRegister = (req,res,next)=>{
     res.render('registerDetails', {homeCSS: true});
 }
+
+/******************* 
+* TEST THIS OUT 
+*********************/
 exports.getUserHome = async (req,res,next) => {
+    if(!req.session.user)return res.redirect('/');
     let [categories, fieldData] = await postController.getCategories();
     let [latestPosts, metaData] = await postController.getLatestPosts({user_id: req.session.user.id, step: 0});
-    latestPosts = latestPosts.map(post=>{
+    latestPosts = await Promise.all(latestPosts.map(async post=>{
         let cat = categories.find(cat => cat.id == post.category_id);
+        let replies = await postModel.getReplies(post.id);
         return {
             ...post,
+            replies: replies,
             category: cat.title
         }
-    })
+    }));
+    req.session.categories = categories;
     req.session.latestPosts = {
         step: 0
     };
@@ -69,9 +78,19 @@ exports.getUser = (req,res,next)=>{
             req.session.user = {
                 ...rows[0]
             }
-            req.session.cookie.maxAge = 600000; 
+            req.session.cookie.maxAge = 3600000; 
             res.redirect(301, "/user/"+req.session.user.id)
         }).catch(err=>{
             console.log("error fetching user...", err);
         })
+}
+
+exports.logout = (req, res, next) => {
+    req.session.destroy(function(err){
+        if(err){
+           console.log(err);
+        }else{
+            res.redirect('/');
+        }
+     });
 }

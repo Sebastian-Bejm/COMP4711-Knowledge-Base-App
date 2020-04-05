@@ -1,7 +1,9 @@
+
+{{>header}}
 <div id="home-section">
     <div id="home-left">
         <div >
-            <img class="img-profile" src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Gull_portrait_ca_usa.jpg">
+            <img class="img-profile" src={{user.imageurl}}>
         </div>
         <div id="user-info">
             <p id="name">{{user.firstname}} {{user.lastname}}</p>
@@ -52,7 +54,7 @@
             </div><!-- end of posting-area -->
         </form><!-- end of question-form -->
         
-        <div id="search-section">
+        {{!-- <div id="search-section">
             <div>
                 <p>Search by topic</p>
             </div>
@@ -69,9 +71,9 @@
             <div>
                 <button id="search button">go-></button>
             </div>
-        </div><!-- end of search-section -->
+        </div><!-- end of search-section --> --}}
         
-        <div id="discussion-area">
+        <div class="discussion-area">
             <div>
                 <p>Latest discussions</p>
             </div>

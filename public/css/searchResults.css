@@ -1,6 +1,6 @@
 /** CSS for results shown, migrate to another file if neccessary later on */
 
-#single-result {
+.single-result {
     display: block;
     margin-left: 30%;
     margin-right: 30%;
@@ -11,7 +11,7 @@
     padding: 4px;
 }
 
-#pfp {
+.pfp {
     float: left;
     width: 75px;
     height: 75px;
@@ -19,7 +19,7 @@
     margin-right: 8px;
 }
 
-#pfp img {
+.pfp img {
     width: 75px;
     height: 75px;
     border-radius: 50%;
@@ -28,22 +28,22 @@
     border: 2px solid lightgray;
 }
 
-#result {
+.result {
     display: inline-block;
     width: 79%;
     margin-left: 8px;
 }
 
-#msg-title {
+.msg-title {
     display: inline-block;
     width: 75%;
 }
 
-#msg-title p {
+.msg-title p {
     margin: 5px;
 }
 
-#topic {
+.topic {
     display: inline-block;
     width: 22%;
     background-color: white;
@@ -51,50 +51,50 @@
     text-align: center;
 }
 
-#topic p {
+.topic p {
     border: 1px solid lightskyblue;
     margin: 5px;
 }
 
-#msg-desc {
+.msg-desc {
     width: 99%;
     text-align: center;
 }
 
-#msg-desc p {
+.msg-desc p {
     margin: 12px 2px 12px 2px;
 }
 
-#date-posted {
+.date-posted {
     width: 49%;
     display: inline-block;
 }
 
-#date-posted p {
+.date-posted p {
     margin: 5px 15px 5px 15px;
     text-align: left;
 }
 
-#num-replies {
+.num-replies {
     text-align: right;
     width: 48%;
     display: inline-block;
 }
 
-#num-replies button {
+.num-replies button {
     margin: 5px 15px 5px 15px;
     text-align: right;
     background-color: white;
     border: 1px solid white;
 }
 
-#num-replies button:hover {
+.num-replies button:hover {
     outline-style: solid;
 }
 
 /** CSS for replies, migrate later */
 
-#replies {
+.replies {
     margin-left: 10%;
     margin-right: 10%;
 }
