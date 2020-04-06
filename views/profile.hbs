@@ -1,59 +1,79 @@
-<div id="profile-section">
+{{>header}}
+
+<div class="profile-section">
     <!-- shows the profile of the person selected, showing the info of the person and all the post of the person by chronological order -->
-    <div id="profile-head">
+    <div class="profile-head">
         
-        <div id="profile-left">
-            <div id="profile-pic">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Gull_portrait_ca_usa.jpg">
+        <div class="profile-left">
+            <div class="profile-pic">
+                <img src={{userProfile.imageurl}}>
             </div>
-            <div id="profile-info">
-                <p id="profile-name">Full name</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas eleifend at quam id posuere. Suspendisse in odio magna. Suspendisse potenti. Curabitur et nunc feugiat, facilisis dolor vel, varius velit.</p>
-                <p>Location</p>
+            <div class="profile-info">
+                <p class="profile-name">{{userProfile.firstname}} {{userProfile.lastname}}</p>
+                <p>{{userProfile.about}}</p>
+                <p>{{userProfile.country}}</p>
             </div>
         </div>
         
-        <div id="profile-right">
-            <button class="button">Message</button>
-            <div id="num-likes">
-                <p># Likes<button class="add-button">+</button></p>
+        <div class="profile-right">
+            <a href="/user/{{userProfile.id}}/message/new">
+                <button class="button">Message</button>
+            </a>
+            <div class="num-likes">
+                <p>{{userProfile.likes}} Likes<a href="/user/{{userProfile.id}}/likes" class="add-button">+</a></p>
             </div>
-            <div id="num-posts">
-                <p># Posts</p>
+            <div class="num-posts">
+                <p>{{userProfile.postcount}} Posts</p>
             </div>
         </div>
         
     </div><!-- end of profile-head -->
     
-    <div id="profile-middle">
-        <p>All posts by {{Firstname}}</p>
+    <div class="profile-middle">
+        <p>All posts by {{userProfile.firstname}}</p>
     </div>
     
-    <div id="profile-posts">
-        <div id="pfp">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Gull_portrait_ca_usa.jpg">
+    <div class="profile-posts">
+        {{#posts}}
+        <div class="pfp">
+            <img src={{../userProfile.imageurl}}>
         </div>
-        
-        <div id="result">
-            <div id="msg-title">
-                <p>Title of this message</p>
+        <div class="result">
+            <div class="msg-title">
+                <p>{{heading}}</p>
             </div>
-            <div id="topic">
-                <p>topic</p>
+            <div class="topic">
+                <p>{{category}}</p>
             </div>
-            <div id="msg-desc">
-                 <p>Message description placeholder</p>
+            <div class="msg-desc">
+                 <p>{{details}}</p>
             </div>
-            <div id="date-posted">
-                <p>Date posted</p>
+            <div class="date-posted">
+                <p>{{senddate}}</p>
             </div>
-            <div id="num-replies">
+            <div class="num-replies">
                 <!-- retrieve replies on click -->
-                <p># replies</p>
+                <p>{{replycount}} replies</p>
             </div>
-
+            {{#replies }}
+                    <!-- one reply -->
+                    <div class="reply">
+                        <div class="pfp">
+                            <!-- placeholder pfp for this reply -->
+                            <img src={{imageurl}}>
+                        </div>
+                        <div class="rep-msg">
+                            <p>{{details}}</p>
+                        </div>
+                    </div>
+            {{/replies }}
         </div>
-    </div>  
+        <form class="reply-form" action="/user/{{../user.id}}/post/{{id}}/reply" method="POST">
+                <textarea name="details" cols="49" rows="4" placeholder="Add your reply..."></textarea>
+                <input type="submit">
+        </form> 
+        {{/posts}} 
+    </div> 
     
 </div><!-- end of profile-section -->
 

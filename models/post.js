@@ -25,6 +25,18 @@ exports.getCategories = () => {
     await db.execute(sql);
     return db.execute(sql2);
  }
+ 
+ exports.getUserPosts = user_id => {
+    let sql = `SELECT p.id, p.user_id, p.category_id, p.heading, p.details,
+    p.senddate, p.replycount, u.imageurl
+    FROM post as p
+    JOIN user as u on p.user_id = u.id
+    WHERE p.user_id <> ${user_id}
+    ORDER BY senddate DESC
+    LIMIT 10`;
+
+    return db.execute(sql);
+}
 
  exports.getLatestPosts = state => {
      let sql = `SELECT p.id, p.user_id, p.category_id, p.heading, p.details,
@@ -52,11 +64,11 @@ exports.getCategories = () => {
  }
 
 exports.getReplies = post_id => {
-    let sql = `SELECT *
+    let sql = `SELECT pr.details, u.imageurl, pr.user_id, pr.id, pr.post_id
      FROM postreply as pr
-     WHERE pr.id = ${post_id}
+     JOIN user as u on pr.user_id = u.id
+     WHERE pr.post_id = ${post_id}
      ORDER BY senddate DESC`;
-
      return db.execute(sql);
 }
 

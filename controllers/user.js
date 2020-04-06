@@ -29,29 +29,6 @@ exports.getRegister = (req,res,next)=>{
     res.render('registerDetails', {homeCSS: true});
 }
 
-/******************* 
-* TEST THIS OUT 
-*********************/
-exports.getUserHome = async (req,res,next) => {
-    if(!req.session.user)return res.redirect('/');
-    let [categories, fieldData] = await postController.getCategories();
-    let [latestPosts, metaData] = await postController.getLatestPosts({user_id: req.session.user.id, step: 0});
-    latestPosts = await Promise.all(latestPosts.map(async post=>{
-        let cat = categories.find(cat => cat.id == post.category_id);
-        let replies = await postModel.getReplies(post.id);
-        return {
-            ...post,
-            replies: replies,
-            category: cat.title
-        }
-    }));
-    req.session.categories = categories;
-    req.session.latestPosts = {
-        step: 0
-    };
-    res.render('usersHome', {usersHomeCSS: true, user: req.session.user, categories: categories, latestPosts: latestPosts });
-}
-
 exports.register = (req, res, next) => {
     let userDetails = {
         id: req.session.user.id,
@@ -83,6 +60,83 @@ exports.getUser = (req,res,next)=>{
         }).catch(err=>{
             console.log("error fetching user...", err);
         })
+}
+
+exports.getProfile = (req,res,next) =>{
+    if(req.params.id == req.session.user.id){
+        console.log("ONE")
+        return this.getUserHome(req,res,next);
+    }
+    if(req.params.id && req.params.id != "undefined"){
+        console.log("TWO")
+        return this.getUserProfile(req,res,next);
+    }
+    res.status(404)        // HTTP status 404: NotFound
+   .send('Not found');
+}
+
+exports.getUserHome = async (req,res,next) => {
+    let [categories, fieldData] = await postController.getCategories();
+    let [latestPosts, metaData] = await postController.getLatestPosts({user_id: req.session.user.id, step: 0});
+    latestPosts = await Promise.all(latestPosts.map(async post =>{
+        let cat = categories.find(cat => cat.id == post.category_id);
+        let [replies, metaData] = await postModel.getReplies(post.id);
+        replies = replies.length > 0? [].concat.apply([], replies) : [];
+        return {
+            ...post,
+            replies: replies,
+            category: cat.title
+        }
+    })).then(resp=>{
+        req.session.categories = categories;
+        req.session.latestPosts = {
+            step: 0
+        };
+        return res.render('usersHome', {usersHomeCSS: true, user: req.session.user, categories: categories, latestPosts: resp });
+    })
+    
+}
+
+exports.getCurrentUserPosts = async (req, res, next) => {
+    let categories = req.session.categories;
+    let [posts, metaData] = await postController.getUserPosts(req.params.id);
+    posts = await Promise.all(posts.map(async post =>{
+        let cat = categories.find(cat => cat.id == post.category_id);
+        let [replies, metaData] = await postModel.getReplies(post.id);
+        replies = [].concat.apply([], replies);
+        return {
+            ...post,
+            replies: replies,
+            category: cat.title
+        }
+    }));
+    res.render('usersHome', {usersHomeCSS: true, user: req.session.user, categories: categories, userPosts: posts });
+}
+
+exports.getUserProfile = async (req,res,next) => {
+    let categories = req.session.categories;
+    let [userProfile, fieldData] = await userModel.getUserById(req.params.id);
+    let [posts, metaData] = await postController.getUserPosts(req.params.id);
+    posts = await Promise.all(posts.map(async post =>{
+        let cat = categories.find(cat => cat.id == post.category_id);
+        let [replies, metaData] = await postModel.getReplies(post.id);
+        replies = [].concat.apply([], replies);
+        return {
+            ...post,
+            replies: replies,
+            category: cat.title
+        }
+    }));
+    req.session.userProfile = userProfile[0];
+    res.render('profile', {profileCSS: true, user: req.session.user, userProfile: userProfile[0], categories: categories, posts: posts });
+}
+
+exports.addLike = (req,res,next) => {
+    userModel.addLike(req.params.id).then(resp=>{
+        return res.redirect('back');
+    }).catch(err=>{
+        console.log(err,"err adding like");
+    })
 }
 
 exports.logout = (req, res, next) => {

@@ -12,7 +12,7 @@
         <div id="statistics">
             <div><!-- post message likes area-->
                 <div id="stat-name">
-                    <p><span>Posts</span></p>
+                    <a href="/user/{{user.id}}/post"><span>Posts</span></a>
                     <p><span>Messages</span></p>
                     <p>Likes</p>
                 </div>
@@ -30,79 +30,120 @@
         </div><!-- end of statistics -->
     </div><!-- end of home-left -->
     
+
     <div id="home-right">
-        <p>What's your question today?</p>
-        <form id="question-form" action="/user/{{user.id}}/post" method="POST">
-            <div id="typing-area">
-                <input  name="heading" type="text" maxLength="40" placeholder="Subject" required>
-                <textarea name="details" type="text" placeholder="Explain in detail..." cols="60" rows="8" required></textarea>
-            </div>
+        {{#if latestPosts}}
+            <p>What's your question today?</p>
+            <form id="question-form" action="/user/{{user.id}}/post" method="POST">
+                <div id="typing-area">
+                    <input  name="heading" type="text" maxLength="40" placeholder="Subject" required>
+                    <textarea name="details" type="text" placeholder="Explain in detail..." cols="60" rows="8" required></textarea>
+                </div>
+                
+                <div id="posting-area">
+                    <div class="language-select">
+                        <select name="category" required>
+                            <option value="" disabled selected>Topic</option>
+                            {{#each categories}}
+                                <option value={{this.id}}>{{this.title}}</option>
+                            {{/each}}
+                        </select>
+                    </div><!-- end of language-select -->
+                    
+                    <div>
+                        <input id="post-button" type="submit" value="Post to timeline">
+                    </div>
+                </div><!-- end of posting-area -->
+            </form><!-- end of question-form -->
             
-            <div id="posting-area">
+            {{!-- <div id="search-section">
+                <div>
+                    <p>Search by topic</p>
+                </div>
+                
                 <div class="language-select">
-                    <select name="category" required>
-                        <option value="" disabled selected>Topic</option>
-                        {{#each categories}}
-                            <option value={{this.id}}>{{this.title}}</option>
-                        {{/each}}
+                    <select>
+                        <option value="0">Topic</option>
+                        <option value="1">html</option>
+                        <option value="2">java</option>
+                        <option value="3">c</option>
+                        <option value="4">php</option>
                     </select>
                 </div><!-- end of language-select -->
-                
                 <div>
-                    <input id="post-button" type="submit" value="Post to timeline">
+                    <button id="search button">go-></button>
                 </div>
-            </div><!-- end of posting-area -->
-        </form><!-- end of question-form -->
-        
-        {{!-- <div id="search-section">
-            <div>
-                <p>Search by topic</p>
-            </div>
+            </div><!-- end of search-section --> --}}
             
-            <div class="language-select">
-                <select>
-                    <option value="0">Topic</option>
-                    <option value="1">html</option>
-                    <option value="2">java</option>
-                    <option value="3">c</option>
-                    <option value="4">php</option>
-                </select>
-            </div><!-- end of language-select -->
-            <div>
-                <button id="search button">go-></button>
+            <div class="discussion-area">
+                <div>
+                    <p>Latest discussions</p>
+                </div>
+                <div>
+                    {{#each latestPosts}}
+                        <div>
+                            <a href="/user/{{this.user_id}}"><img src={{this.imageurl}} /></a>
+                            <p>{{this.category}}</p>
+                            <p>{{this.heading}}</p>
+                            <p>{{this.details}}</p>
+                            <p>{{this.replycount}} replies</p>
+                            <div class="replies">
+                                {{#each this.replies }}
+                                    <!-- one reply -->
+                                    <div class="reply">
+                                        <div class="rep-pfp">
+                                            <!-- placeholder pfp for this reply -->
+                                            <img src={{this.imageurl}}>
+                                        </div>
+                                        <div class="rep-msg">
+                                            <p>{{this.details}}</p>
+                                        </div>
+                                    </div>
+                                {{/each}}
+                                <form class="reply-form" action="/user/{{../user.id}}/post/{{this.id}}/reply" method="POST">
+                                    <textarea name="details" cols="49" rows="4" placeholder="Add your reply..."></textarea>
+                                    <input type="submit">
+                                </form>
+                            </div><!-- end replies --> 
+                        </div>
+                    {{/each}}
+                    <!------------ All the single messages are grouped here ------------->
+                </div>
+            </div><!-- end of discussion-area -->
+        {{else}}
+            <div class="discussion-area">
+                <div>
+                    <p>All Posts</p>
+                </div>
+                <div>
+                    {{#each userPosts}}
+                        <div>
+                            <img src={{this.imageurl}} />
+                            <p>{{this.category}}</p>
+                            <p>{{this.heading}}</p>
+                            <p>{{this.details}}</p>
+                            <p>{{this.replycount}} replies</p>
+                            <div class="replies">
+                                {{#each this.replies }}
+                                    <!-- one reply -->
+                                    <div class="reply">
+                                        <div class="rep-pfp">
+                                            <!-- placeholder pfp for this reply -->
+                                            <img src={{this.imageurl}}>
+                                        </div>
+                                        <div class="rep-msg">
+                                            <p>{{this.details}}</p>
+                                        </div>
+                                    </div>
+                                {{/each}}
+                            </div><!-- end replies --> 
+                        </div>
+                    {{/each}}
+                </div>
             </div>
-        </div><!-- end of search-section --> --}}
-        
-        <div class="discussion-area">
-            <div>
-                <p>Latest discussions</p>
-            </div>
-            <div>
-                {{#each latestPosts}}
-                    <div>
-                        <img src={{this.imageurl}} />
-                        <p>{{this.category}}</p>
-                        <p>{{this.heading}}</p>
-                        <p>{{this.details}}</p>
-                        <p>{{this.replycount}}</p>
-                    </div>
-                {{/each}}
-                <!------------ All the single messages are grouped here ------------->
-            </div>
-        </div><!-- end of discussion-area -->
+        {{/if}}
     </div><!-- end of home-right -->
+
+
+
 </div><!-- end of home-section -->
-
-
-<!--<div>
-    <p>firstName:{{user.firstname}}</p>
-    <p>lastName:{{user.lastname}}</p>
-    <p>email:{{user.email}}</p>
-    <p>image:{{user.imageurl}}</p>
-    <p>about:{{user.about}}</p>
-    <p>country:{{user.country}}</p>
-    <p>dob:{{user.dob}}</p>
-    <p>posts:{{user.postcount}}</p>
-    <p>messages:{{user.messagecount}}</p>
-    <p>likes:{{user.likes}}</p>
-</div>-->

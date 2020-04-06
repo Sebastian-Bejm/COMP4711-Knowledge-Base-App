@@ -1,9 +1,5 @@
 let postModel = require('../models/post');
 
-exports.getCategories = () => {
-    return postModel.getCategories();
-}
-
 
 exports.createPost = (req,res,next) => {
     let newPost = {
@@ -13,12 +9,15 @@ exports.createPost = (req,res,next) => {
         details: req.body.details
      }
     postModel.createPost(newPost).then(data=>{
-       console.log(data);
        req.session.user.postcount++;
        res.redirect(301, "/user/"+req.session.user.id)
     }).catch(err=>{
         console.log(err,"err creating new post");
     })
+}
+
+exports.getUserPosts = user_id => {
+    return postModel.getUserPosts(user_id);
 }
 
 exports.getLatestPosts = state => {
@@ -34,7 +33,8 @@ exports.search = (req,res,next) =>{
     postModel.search(searchData).then(async ([results, fieldData])=>{
         results = await Promise.all(results.map(async post=>{
             let cat = req.session.categories.find(cat => cat.id == post.category_id);
-            let replies = await postModel.getReplies(post.id);
+            let [replies, metaData] = await postModel.getReplies(post.id);
+            replies = [].concat.apply([], replies);
             return {
                 ...post,
                 replies: replies,
@@ -43,16 +43,11 @@ exports.search = (req,res,next) =>{
         }));
         req.session.results = results;
         req.session.searchData = searchData;
-        res.render('searchResults', {searchResultsCSS: true, user: req.session.user, results: results });
+        res.render('searchResults', {searchResultsCSS: true, user: req.session.user, categories: req.session.categories, results: results });
     }).catch(err=>{
         console.log("err fetching search...", err);
     })
 }
-
-// exports.getSearch=(req,res,next)=>{
-    
-// }
-
 
 exports.addReply = (req,res,next) => {
     let data = {
@@ -61,11 +56,13 @@ exports.addReply = (req,res,next) => {
         details: req.body.details
     }
     postModel.addReply(data).then(resp=>{
-        console.log(resp);
-        return res.redirect("/search");
+        return res.redirect('back');
      }).catch(err=>{
          console.log(err,"err creating new reply");
      })
 }
 
+exports.getCategories = () => {
+    return postModel.getCategories();
+}
 

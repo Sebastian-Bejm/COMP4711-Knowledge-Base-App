@@ -3,52 +3,54 @@
 <div id="search-results">
 
     <!-- shows a single result, replace placeholders as neccessary for a profile message -->
-     {{#each results}}
+     {{#results }}
         <div class="single-result">
             <div class="pfp">
                 <!-- placeholder image, replace with params -->
-                <img src={{this.imageurl}}>
+                <img src={{imageurl}}>
             </div>
             <div class="result">
                 <div class="msg-title">
-                    <p>{{this.heading}}</p>
+                    <p>{{heading}}</p>
                 </div>
                 <div class="topic">
-                    <p>{{this.category}}</p>
+                    <p>{{category}}</p>
                 </div>
                 <div class="msg-desc">
-                    <p>{{this.details}}</p>
+                    <p>{{details}}</p>
                 </div>
                 <div class="date-posted">
-                    <p>{{this.senddate}}</p>
+                    <p>{{senddate}}</p>
                 </div>
                 <div class="num-replies">
                     <!-- retrieve replies on click -->
-                    <button>{{this.replycount}}</button>
+                    <button>{{replycount}} replies</button>
                 </div>
             </div>
 
             <!-- show replies under result -->
             <div class="replies">
 
-                <!-- one reply -->
-                <div class="reply">
-                    <div class="rep-pfp">
-                        <!-- placeholder pfp for this reply -->
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Gull_portrait_ca_usa.jpg">
+                {{#replies }}
+                    <!-- one reply -->
+                    <div class="reply">
+                        <div class="rep-pfp">
+                            <!-- placeholder pfp for this reply -->
+                            <img src={{imageurl}}>
+                        </div>
+                        <div class="rep-msg">
+                            <p>{{details}}</p>
+                        </div>
                     </div>
-                    <div class="rep-msg">
-                        <p>Reply message placeholder</p>
-                    </div>
-                </div>
+                {{/replies }}
                     
             </div><!-- end replies -->
-            <form class="reply-form" action="/user/121/post/{{this.id}}/reply" method="POST">
+            <form class="reply-form" action="/user/{{../user.id}}/post/{{this.id}}/reply" method="POST">
                 <textarea name="details" cols="49" rows="4" placeholder="Add your reply..."></textarea>
                 <input type="submit">
             </form> 
         </div><!-- end single result -->      
-    {{/each}}
+    {{/results}}
     
 
 </div><!-- end search results -->
