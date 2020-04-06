@@ -19,13 +19,13 @@ exports.sendMessage = (req,res,next) => {
         var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: 'knowledgebaseapp@gmail.com',
+            user: 'knowledgebasebapp@gmail.com',
             pass: 'kbapp1234'
         }
         });
 
         var mailOptions = {
-            from: 'knowledgebaseapp@gmail.com',
+            from: 'knowledgebasebapp@gmail.com',
             to: req.session.userProfile.email,
             subject: 'From Knowledgebase app! - '+req.body.subject,
             text: req.body.details
@@ -41,5 +41,27 @@ exports.sendMessage = (req,res,next) => {
         res.redirect("/user/"+req.session.userProfile.id);
     }).catch(err=>{
         console.log(err,"err sending message");
+    })
+}
+
+exports.getAllMessages = (req,res,next) => {
+    messageModel.getAllMessages(req.session.user.id).then(async ([messages, fieldData])=>{
+        messages = await Promise.all(messages.map(async message=>{
+            let sender = message.sender_id == req.session.user.id;
+            let [otherUser, fieldData] = await userModel.getUserForMessage(sender? message.receiver_id:message.sender_id);
+            let [replies, metaData] = await messageModel.getMessageReplies(message.id);
+            replies = [].concat.apply([], replies);
+            return {
+                ...message,
+                replies: replies,
+                imageurl: otherUser[0].imageurl,
+                firstname: otherUser[0].firstname,
+                lastname: otherUser[0].lastname
+            }
+        }));
+        req.session.messages = messages;
+        res.render('allMessages', {allMessagesCSS: true, user: req.session.user, categories: req.session.categories, messages: messages });
+    }).catch(err=>{
+        console.log("err fetching messages...", err);
     })
 }

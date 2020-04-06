@@ -1,0 +1,19 @@
+{{>header}}
+
+<div class="allMessages">
+    <div class="messageList">
+        {{#messages}}
+            <div onclick="assign('existingComments',this)">
+                <img src={{imageurl}}>
+                <p>{{firstname}} {{lastname}}</p>
+                <p>{{subject}}</p>
+                <p>{{senddate}}</p>
+            </div>
+        {{/messages}}
+    </div>
+
+    <div class="messageReplies">
+        {{!-- {{@root.existingComments }} --}}
+    </div>
+</div>
+
