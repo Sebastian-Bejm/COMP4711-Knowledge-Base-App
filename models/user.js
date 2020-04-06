@@ -46,3 +46,10 @@ exports.getUserById = id => {
     `
     return db.execute(sql);
  }
+
+ exports.getUserForMessage = id => {
+    let sql = ` SELECT imageurl, firstname, lastname FROM user
+    WHERE id = '${id}'
+   `
+   return db.execute(sql);
+ }

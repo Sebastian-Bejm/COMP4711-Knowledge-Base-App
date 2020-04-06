@@ -1,0 +1,21 @@
+
+.allMessages {
+    display: flex;
+}
+
+.messageList {
+    width: 300px;
+}
+
+.messageList img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border-color: aliceblue;
+    border-width: 2px;
+    border: 2px solid lightgray;
+}
+
+.messageReplies {
+    border: 1px solid lightgray;
+}

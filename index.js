@@ -12,16 +12,39 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
 const expressHbs = require('express-handlebars');
+// var hbs = expressHbs.create({
+//   // Specify helpers which are only registered on this instance.
+//   helpers: {
+//       foo: function () { return 'FOO!'; },
+//       bar: function () { return 'BAR!'; }
+//   }
+// });
+
 app.engine(
     'hbs',
     expressHbs({
       layoutsDir: 'views/layouts/',
       defaultLayout: 'main-layout',
-      extname: 'hbs'
+      extname: 'hbs',
+      helpers: {
+        foo: function () { return 'FOO!'; },
+        bar: function () { return 'BAR!'; },
+        assign: function (varName, varValue, options) {
+          console.log("varName",varName)
+          console.log("Value",varValue)
+          console.log("OPTIONS",options)
+          if (!options.data.root) {
+              options.data.root = {};
+          }
+          options.data.root[varName] = varValue;
+        }
+    }
     })
 );
 app.set('view engine', 'hbs');
 app.set('views', 'views');
+
+
 
 app.use(session({
     secret:'superdupersecretkeynooneknows',// used to encrypt/sign the session id
