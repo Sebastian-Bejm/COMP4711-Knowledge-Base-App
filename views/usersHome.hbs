@@ -1,16 +1,15 @@
-
 {{>header}}
-<div id="home-section">
+<div id="home-section" class="flex">
     <div id="home-left">
-        <div >
+        <div class="center">
             <img class="img-profile" src={{user.imageurl}}>
         </div>
-        <div id="user-info">
+        <div id="user-info" class="center">
             <p id="name">{{user.firstname}} {{user.lastname}}</p>
             <p id="user-desc">-User description-</p>
         </div>
         <div id="statistics">
-            <div><!-- post message likes area-->
+            <div class="flex"><!-- post message likes area-->
                 <div id="stat-name">
                     <a href="/user/{{user.id}}/post"><span>Posts</span></a>
                     <p><span>Messages</span></p>

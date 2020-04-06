@@ -1,7 +1,46 @@
 .img-profile {
     width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 2px solid lightgray;
 }
 
 .discussion-area img {
     width: 100px;
+}
+
+ /*Base of the home section*/
+#home-section {
+    margin: auto;
+    min-height: 100%;
+    width: 1000px;
+}
+
+
+#home-left {
+    flex-grow: 1;
+    padding: 50px 10px 0px 10px;
+    width: 230px;
+}
+
+#home-right {
+    flex-grow: 2;
+    padding: 10px 10px 0px 10px;
+}
+
+/*home-left stuff*/
+#statistics {
+    margin: auto;
+    padding: 10px 20px 0px 20px
+}
+
+
+/*Global css*/
+.flex {
+    display: flex;
+}
+
+.center {
+    text-align:center;
+    border: 3px solid green;
 }
