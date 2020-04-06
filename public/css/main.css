@@ -1,0 +1,34 @@
+body  {
+    margin: 0;
+    padding: 0;
+}
+
+.navHeader {
+    display: flex;
+    height: 4rem;
+    padding: 0.5rem;
+}
+
+.kbLogo {
+    flex-grow: 1;
+}
+
+.searchForm {
+    flex-grow: 3;
+}
+
+.logoutForm {
+    flex-grow: 4;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 2rem;
+}
+.logoutBtn {
+    text-align: center;
+    width: 100px;
+    height: 30px;
+    background-color:#069FEB;
+    color: white;
+    border: none;
+    text-decoration: none;
+}

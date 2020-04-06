@@ -1,7 +1,5 @@
 let db = require('../util/db');
 
-
-
 exports.createUser = (data) => {
     let sql = `Insert into user (firstname, lastname, email, password) values (
         '${data.firstname}',
@@ -25,9 +23,26 @@ exports.registerUser = (data) => {
     return db.execute(sql);
 }
 
+exports.addLike = id => {
+    let sql = `UPDATE user SET 
+        likes = likes + 1
+        WHERE
+            id = ${id}
+        ;
+    `;
+    return db.execute(sql);
+}
+
 exports.getUserByEmail = email => {
    let sql = ` SELECT * FROM user
     WHERE email = '${email}'
    `
    return db.execute(sql);
 }
+
+exports.getUserById = id => {
+    let sql = ` SELECT id, firstname, lastname, email, imageurl, about, country, postcount, likes FROM user
+     WHERE id = '${id}'
+    `
+    return db.execute(sql);
+ }

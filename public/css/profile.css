@@ -1,27 +1,27 @@
-#profile-section {
+.profile-section {
     height:100%;
     min-width: 1000px;
 }
-#profile-head {
+.profile-head {
     margin: auto;
     width:60%;
     height:400px;
     margin-top: 10px;
 }
 
-#profile-left {
+.profile-left {
     float: left;
     width: 70%;
 }
 
-#profile-pic {
+.profile-pic {
     width: 150px;
     height: 150px;
     border-radius: 50%;
     margin-right: 8px;
 }
 
-#profile-pic img {
+.profile-pic img {
     width: 150px;
     height: 150px;
     border-radius: 50%;
@@ -30,24 +30,24 @@
     border: 2px solid lightgray;
 }
 
-#profile-info {
+.profile-info {
     width: 100%;
     font-size: 20px;
 }
 
-#profile-name {
+.profile-name {
     font-size: 40px;
     margin-top: 30px;
     margin-bottom: 0px;
 }
 
-#profile-right {
+.profile-right {
     float:right;
     padding: 100px 20px 100px;
 }
 
 .button {
-    background-color: #008CBA; /* Green */
+    background-color: .008CBA; /* Green */
     border: none;
     border-radius: 4px;
     color: white;
@@ -60,14 +60,14 @@
     cursor: pointer;
 }
 
-#num-likes p{
+.num-likes p{
     color:blue;
 }
 
-#num-likes .add-button{
+.num-likes .add-button{
     margin-left: 10px;
     padding: 5px 10px;
-    background-color: #008CBA; /* Green */
+    background-color: .008CBA; /* Green */
     border: none;
     border-radius: 50%;
     color: white;
@@ -79,17 +79,17 @@
     cursor: pointer;
 }
 
-#num-posts {
+.num-posts {
         color:blue;
 }
 
-#profile-middle {
+.profile-middle {
     margin-left: 20%;
     font-size: 2em;
     font-weight: bold; 
 }
 
-#profile-posts {
+.profile-posts {
     margin: auto;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -99,7 +99,7 @@
     border: 2px solid lightgray;
 }
 
-#pfp {
+.pfp {
     float: left;
     width: 75px;
     height: 75px;
@@ -107,7 +107,7 @@
     margin-right: 8px;
 }
 
-#pfp img {
+.pfp img {
     width: 75px;
     height: 75px;
     border-radius: 50%;
@@ -116,22 +116,22 @@
     border: 2px solid lightgray;
 }
 
-#result {
+.result {
     display: inline-block;
     width: 78%;
     margin-left: 8px;
 }
 
-#msg-title {
+.msg-title {
     display: inline-block;
     width: 75%;
 }
 
-#msg-title p {
+.msg-title p {
     margin: 5px;
 }
 
-#topic {
+.topic {
     display: inline-block;
     width: 22%;
     background-color: white;
@@ -139,37 +139,37 @@
     text-align: center;
 }
 
-#topic p {
+.topic p {
     border: 1px solid lightskyblue;
     margin: 5px;
 }
 
-#msg-desc {
+.msg-desc {
     width: 99%;
     text-align: center;
 }
 
-#msg-desc p {
+.msg-desc p {
     margin: 12px 2px 12px 2px;
 }
 
-#date-posted {
+.date-posted {
     width: 49%;
     display: inline-block;
 }
 
-#date-posted p {
+.date-posted p {
     margin: 5px 15px 5px 15px;
     text-align: left;
 }
 
-#num-replies {
+.num-replies {
     text-align: right;
     width: 48%;
     display: inline-block;
 }
 
-#num-replies p {
+.num-replies p {
     margin: 5px 15px 5px 15px;
     text-align: right;
 }
