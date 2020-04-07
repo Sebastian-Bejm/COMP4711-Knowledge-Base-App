@@ -6,7 +6,7 @@
         </div>
         <div id="user-info" class="center">
             <p id="name" class="big bold">{{user.firstname}} {{user.lastname}}</p>
-            <p id="user-desc" class="grey">-User description-</p>
+            <p id="user-desc" class="grey">{{user.about}}</p>
         </div>
         <div id="statistics">
             <div class="flex grey"><!-- post message likes area-->
@@ -85,8 +85,8 @@
                             <p>{{this.category}}</p>
                             <p>{{this.heading}}</p>
                             <p>{{this.details}}</p>
-                            <p>{{this.replycount}} replies</p>
-                            <div class="replies">
+                            <p class="reply-count" onclick="toggleViewReplies({{this.id}})">{{this.replycount}} replies</p>
+                            <div id="post-replies{{this.id}}" class="replies">
                                 {{#each this.replies }}
                                     <!-- one reply -->
                                     <div class="reply">
@@ -121,8 +121,8 @@
                             <p>{{this.category}}</p>
                             <p>{{this.heading}}</p>
                             <p>{{this.details}}</p>
-                            <p>{{this.replycount}} replies</p>
-                            <div class="replies">
+                            <p class="reply-count" onclick="toggleViewReplies({{this.id}})">{{this.replycount}} replies</p>
+                            <div id="post-replies{{this.id}}" class="replies">
                                 {{#each this.replies }}
                                     <!-- one reply -->
                                     <div class="reply">
@@ -135,6 +135,10 @@
                                         </div>
                                     </div>
                                 {{/each}}
+                                <form class="reply-form" action="/user/{{../user.id}}/post/{{this.id}}/reply" method="POST">
+                                    <textarea name="details" cols="49" rows="4" placeholder="Add your reply..."></textarea>
+                                    <input type="submit">
+                                </form>
                             </div><!-- end replies --> 
                         </div>
                     {{/each}}

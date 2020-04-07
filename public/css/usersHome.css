@@ -73,6 +73,7 @@ textarea {
 /*latest discussion section*/
 .discussion-area {
     margin-top: 10px;
+    width: 400px;
 }
 
 /*Global css*/
@@ -143,3 +144,19 @@ textarea {
     width: 200px;
 }
 
+.replies {
+    display: none;
+}
+
+.reply-count {
+    width: 100%;
+    cursor: pointer;
+}
+
+.reply-form {
+    display: flex;
+    flex-wrap: wrap;
+}
+.reply-form textarea {
+    width: 100%;
+}
