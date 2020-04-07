@@ -60,9 +60,10 @@ exports.getAllMessages = (req,res,next) => {
             }
         }));
         req.session.messages = messages;
+        req.session.activeMessageId = req.session.activeMessageId ? req.session.activeMessageId : messages[0].id;
         res.render('allMessages', {allMessagesCSS: true, user: req.session.user, 
             userData: JSON.stringify(req.session.user), categories: req.session.categories, 
-            messages: messages, messagesData: JSON.stringify(messages) });
+            messages: messages, messagesData: JSON.stringify(messages), activeId: req.session.activeMessageId });
     }).catch(err=>{
         console.log("err fetching messages...", err);
     })
@@ -74,8 +75,9 @@ exports.addReply = (req,res,next) => {
         message_id: req.params.message_id,
         details: req.body.details.trim()
     }
+    req.session.activeMessageId = data.message_id;
     messageModel.addReply(data).then(resp=>{
-        return res.redirect('back');
+        return res.redirect("back");
      }).catch(err=>{
          console.log(err,"err creating new reply");
      })
