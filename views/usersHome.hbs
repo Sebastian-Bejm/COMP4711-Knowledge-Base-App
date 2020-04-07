@@ -55,55 +55,38 @@
                 </div><!-- end of posting-area -->
             </form><!-- end of question-form -->
             
-            {{!-- <div id="search-section" class="flex">
-                <div class="no-margin right-margin text-padding">
-                    <p>Search by topic</p>
-                </div>
-                
-                <div class="language-select">
-                    <select class="text-padding dropdown-selection left-right-margin">
-                        <option value="0">Topic</option>
-                        <option value="1">html</option>
-                        <option value="2">java</option>
-                        <option value="3">c</option>
-                        <option value="4">php</option>
-                    </select>
-                </div><!-- end of language-select -->
-                <div>
-                    <button id="search button" class="go-button left">go-></button>
-                </div>
-            </div><!-- end of search-section --> --}}
-            
             <div class="discussion-area">
                 <div>
                     <p class="big">Latest discussions</p>
                 </div>
                 <div>
                     {{#each latestPosts}}
-                        <div>
-                            <a href="/user/{{this.user_id}}"><img src={{this.imageurl}} class="img-profile" /></a>
-                            <p>{{this.category}}</p>
-                            <p>{{this.heading}}</p>
-                            <p>{{this.details}}</p>
-                            <p class="reply-count" onclick="toggleViewReplies({{this.id}})">{{this.replycount}} replies</p>
-                            <div id="post-replies{{this.id}}" class="replies">
-                                {{#each this.replies }}
-                                    <!-- one reply -->
-                                    <div class="reply">
-                                        <div class="rep-pfp">
-                                            <!-- placeholder pfp for this reply -->
-                                            <img src={{this.imageurl}} class="img-profile">
+                        <div class="post">
+                            <a href="/user/{{this.user_id}}"><img src={{this.imageurl}} class="img-post" /></a>
+                            <div>
+                                <p>{{this.category}}</p>
+                                <p>{{this.heading}}</p>
+                                <p>{{this.details}}</p>
+                                <p class="reply-count" onclick="toggleViewReplies({{this.id}})">{{this.replycount}} replies</p>
+                                <div id="post-replies{{this.id}}" class="replies">
+                                    {{#each this.replies }}
+                                        <!-- one reply -->
+                                        <div class="reply">
+                                            <div class="rep-pfp">
+                                                <!-- placeholder pfp for this reply -->
+                                                <img src={{this.imageurl}} class="img-reply">
+                                            </div>
+                                            <div class="rep-msg">
+                                                <p>{{this.details}}</p>
+                                            </div>
                                         </div>
-                                        <div class="rep-msg">
-                                            <p>{{this.details}}</p>
-                                        </div>
-                                    </div>
-                                {{/each}}
-                                <form class="reply-form" action="/user/{{../user.id}}/post/{{this.id}}/reply" method="POST">
-                                    <textarea name="details" cols="49" rows="4" placeholder="Add your reply..."></textarea>
-                                    <input type="submit">
-                                </form>
-                            </div><!-- end replies --> 
+                                    {{/each}}
+                                    <form class="reply-form" action="/user/{{../user.id}}/post/{{this.id}}/reply" method="POST">
+                                        <textarea name="details" cols="49" rows="4" placeholder="Add your reply..."></textarea>
+                                        <input type="submit">
+                                    </form>
+                                </div><!-- end replies --> 
+                            </div>
                         </div>
                     {{/each}}
                     <!------------ All the single messages are grouped here ------------->
@@ -117,7 +100,7 @@
                 <div>
                     {{#each userPosts}}
                         <div>
-                            <img src={{this.imageurl}} class="img-profile" />
+                            <img src={{this.imageurl}} class="img-post" />
                             <p>{{this.category}}</p>
                             <p>{{this.heading}}</p>
                             <p>{{this.details}}</p>
@@ -128,7 +111,7 @@
                                     <div class="reply">
                                         <div class="rep-pfp">
                                             <!-- placeholder pfp for this reply -->
-                                            <img src={{this.imageurl}} class="img-profile">
+                                            <img src={{this.imageurl}} class="img-reply">
                                         </div>
                                         <div class="rep-msg">
                                             <p>{{this.details}}</p>

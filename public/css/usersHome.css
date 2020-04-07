@@ -1,22 +1,11 @@
-.img-profile {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    border: 2px solid lightgray;
-}
-
-.discussion-area img {
-    width: 100px;
-}
 
  /*Base of the home section*/
-#home-section {
+ #home-section {
     margin: auto;
     min-height: 100%;
     width: 1000px;
     font-family: Verdana
 }
-
 
 #home-left {
     flex-grow: 1;
@@ -51,6 +40,32 @@ textarea {
 
 #posting-area {
     width: 300px;
+}
+
+
+.img-profile {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 2px solid lightgray;
+}
+
+.img-post {
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    border: 2px solid lightgray;
+}
+
+.img-reply {
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
+    border: 2px solid lightgray;
+}
+
+.post {
+    display: flex;
 }
 
 .post-button {
