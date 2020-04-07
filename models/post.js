@@ -55,7 +55,7 @@ exports.getCategories = () => {
      p.senddate, p.replycount, u.imageurl
      FROM post as p
      JOIN user as u on p.user_id = u.id
-     WHERE p.user_id <> ${searchData.user_id} ${searchData.query ? ` AND p.heading LIKE '%${searchData.query}%' OR p.details LIKE '%${searchData.query}%'`: ``} 
+     WHERE p.user_id <> ${searchData.user_id} ${searchData.query ? ` AND p.heading LIKE '%${searchData.query}%' `: ``} 
      ${searchData.category ? ` AND p.category_id = ${searchData.category}` : ``}
      ORDER BY senddate DESC
      LIMIT 10
