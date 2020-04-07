@@ -10,8 +10,8 @@ exports.getNewMessage = (req,res,next) => {
 
 exports.sendMessage = (req,res,next) => {
     let message = {
-        subject: req.body.subject,
-        details: req.body.details,
+        subject: req.body.subject.replace(/\r?\n|\r/gm, "").trim(),
+        details: req.body.details.replace(/\r?\n|\r/gm, "").trim(),
         sender_id: req.session.user.id,
         receiver_id: req.params.id
     }
@@ -27,8 +27,8 @@ exports.sendMessage = (req,res,next) => {
         var mailOptions = {
             from: 'knowledgebasebapp@gmail.com',
             to: req.session.userProfile.email,
-            subject: 'From Knowledgebase app! - '+req.body.subject,
-            text: req.body.details
+            subject: 'From Knowledgebase app! - '+req.body.subject.replace(/\r?\n|\r/gm, "").trim(),
+            text: req.body.details.replace(/\r?\n|\r/gm, "").trim()
         };
 
         transporter.sendMail(mailOptions, function(error, info){
@@ -73,7 +73,7 @@ exports.addReply = (req,res,next) => {
     let data = {
         user_id: req.params.id,
         message_id: req.params.message_id,
-        details: req.body.details.trim()
+        details: req.body.details.replace(/\r?\n|\r/gm, "").trim()
     }
     req.session.activeMessageId = data.message_id;
     messageModel.addReply(data).then(resp=>{

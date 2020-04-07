@@ -5,6 +5,7 @@ const router = express.Router();
 const is_authenticated = require("../util/is-auth");
 
 
+router.get("/post/seeddb", postController.seedPosts);
 router.post('/user/:id/post', is_authenticated, postController.createPost);
 router.get("/user/:id/post", is_authenticated, userController.getCurrentUserPosts)
 router.post("/search", is_authenticated, postController.search);

@@ -53,3 +53,26 @@ exports.getUserById = id => {
    `
    return db.execute(sql);
  }
+
+ exports.seedUsers = users => {
+     let values = ``
+     for(let i = 0; i < users.length; i++){
+         let user = users[i];
+         values += `
+         (
+             '${user.firstname}',
+             '${user.lastname}',
+             '${user.email}',
+             '${user.password}',
+             '${user.imageurl}',
+             '${user.about}',
+             '${user.dob}',
+             '${user.country}'
+         )${i == users.length - 1 ? ";":","}
+         `
+     }
+     let sql = `Insert into user (firstname, lastname, email, password, imageurl, about, dob, country) values
+        ${values}
+    `;
+    return db.execute(sql);
+ }

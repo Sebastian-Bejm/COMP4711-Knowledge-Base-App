@@ -175,3 +175,21 @@ textarea {
 .reply-form textarea {
     width: 100%;
 }
+
+.paginate {
+    display: flex;
+    justify-content: space-between;
+}
+
+.paginate-button {
+    padding: 5px 15px;
+    color: deepskyblue;
+    background-color: transparent;
+    border: 1px solid deepskyblue;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.disabled {
+    cursor: not-allowed;
+}

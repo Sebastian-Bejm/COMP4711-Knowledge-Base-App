@@ -1,14 +1,16 @@
+const axios = require('axios');
 let userModel = require('../models/user');
 let postModel = require('../models/post');
 const postController = require('./post');
 
+
 exports.createUser = (req,res,next) => {
     //NEED TO CHECK BOTH CONFIRM AND PASS MATCH
     let newUser = {
-        firstname: req.body.s_fName,
-        lastname: req.body.s_lName,
-        email: req.body.s_email,
-        password: req.body.s_pass
+        firstname: req.body.s_fName.replace(/\r?\n|\r/gm, "").trim(),
+        lastname: req.body.s_lName.replace(/\r?\n|\r/gm, "").trim(),
+        email: req.body.s_email.replace(/\r?\n|\r/gm, "").trim(),
+        password: req.body.s_pass.replace(/\r?\n|\r/gm, "").trim()
      }
 
     userModel.createUser(newUser).then(data=>{
@@ -32,10 +34,10 @@ exports.getRegister = (req,res,next)=>{
 exports.register = (req, res, next) => {
     let userDetails = {
         id: req.session.user.id,
-        imageurl: req.body.r_imageURL,
-        about: req.body.r_about,
-        dob: req.body.r_birth,
-        country: req.body.r_country
+        imageurl: req.body.r_imageURL.replace(/\r?\n|\r/gm, "").trim(),
+        about: req.body.r_about.replace(/\r?\n|\r/gm, "").trim(),
+        dob: req.body.r_birth.replace(/\r?\n|\r/gm, "").trim(),
+        country: req.body.r_country.replace(/\r?\n|\r/gm, "").trim()
     }
     userModel.registerUser(userDetails).then(data=>{
         req.session.user = {
@@ -75,7 +77,9 @@ exports.getProfile = (req,res,next) =>{
 
 exports.getUserHome = async (req,res,next) => {
     let [categories, fieldData] = await postController.getCategories();
-    let [latestPosts, metaData] = await postController.getLatestPosts({user_id: req.session.user.id, step: 0});
+    //console.log(req.session.latestPostStep)
+    req.session.latestPostStep = req.session.latestPostStep ? req.session.latestPostStep : 0;
+    let [latestPosts, metaData] = await postController.getLatestPosts({user_id: req.session.user.id, step: req.session.latestPostStep});
     latestPosts = await Promise.all(latestPosts.map(async post =>{
         let cat = categories.find(cat => cat.id == post.category_id);
         let [replies, metaData] = await postModel.getReplies(post.id);
@@ -87,10 +91,7 @@ exports.getUserHome = async (req,res,next) => {
         }
     })).then(resp=>{
         req.session.categories = categories;
-        req.session.latestPosts = {
-            step: 0
-        };
-        return res.render('usersHome', {usersHomeCSS: true, user: req.session.user, categories: categories, latestPosts: resp });
+        return res.render('usersHome', {usersHomeCSS: true, user: req.session.user, userData: JSON.stringify(req.session.user), categories: categories, latestPosts: JSON.stringify(resp), latestPostStep: req.session.latestPostStep });
     })
     
 }
@@ -145,4 +146,37 @@ exports.logout = (req, res, next) => {
             res.redirect('/');
         }
      });
+}
+
+exports.seedUsers = (req,res,next) => {
+    axios.get('https://randomuser.me/api/?results=10')
+    .then(response => {
+        //console.log(response.data.results);
+        let newUsers = formatUsers(response.data.results);
+        //console.log(newUsers)
+        userModel.seedUsers(newUsers).then(resp=>{
+            console.log("Successfully seeded db users!")
+        }).catch(err=>{
+            console.log(err);
+        })
+        res.redirect("/");
+    })
+    .catch(error => {
+        console.log(error);
+    });               
+}
+
+const formatUsers = users => {
+    return users.map((user,index)=>{
+        return {
+            firstname: user.name.first,
+            lastname: user.name.last,
+            email: `test${index}@test.com`,
+            password: "test"+index,
+            imageurl: user.picture.thumbnail,
+            about: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec maximus cursus nisl, ut suscipit lorem pellentesque ac. Aenean imperdiet suscipit nunc nec interdum.",
+            dob: user.dob.date,
+            country: user.location.country,
+        }
+    });
 }

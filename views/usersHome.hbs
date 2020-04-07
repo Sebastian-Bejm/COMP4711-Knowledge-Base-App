@@ -59,8 +59,8 @@
                 <div>
                     <p class="big">Latest discussions</p>
                 </div>
-                <div>
-                    {{#each latestPosts}}
+                <div id="latestPosts">
+                    {{!-- {{#each latestPosts}}
                         <div class="post">
                             <a href="/user/{{this.user_id}}"><img src={{this.imageurl}} class="img-post" /></a>
                             <div>
@@ -88,8 +88,24 @@
                                 </div><!-- end replies --> 
                             </div>
                         </div>
-                    {{/each}}
+                    {{/each}} --}}
                     <!------------ All the single messages are grouped here ------------->
+                </div>
+                <div class="paginate">
+                    <button 
+                        {{!-- {{#ifEquals latestPostStep 0}}
+                            class="paginate-button disabled"
+                        {{/ifEquals}}
+                        {{#ifNotEquals latestPostStep 0}}
+                            href="/user/{{user.id}}/paginateLatestPosts/-1" 
+                            class="paginate-button"
+                        {{/ifNotEquals}} --}}
+                        onclick="setLatestPosts(-1)"
+                        class="paginate-button "
+                        >
+                        Prev
+                    </button>
+                    <button onclick="setLatestPosts(-1)" class="paginate-button ">Next</button>
                 </div>
             </div><!-- end of discussion-area -->
         {{else}}
@@ -129,7 +145,76 @@
             </div>
         {{/if}}
     </div><!-- end of home-right -->
-
-
-
 </div><!-- end of home-section -->
+
+<script>
+    const latestPosts = JSON.parse('{{{latestPosts}}}');
+    const user = JSON.parse('{{{userData}}}');
+    let step  = 0;
+
+    const setLatestPosts = direction =>{
+        if(latestPosts.length <= 0)return;
+        step += direction;
+        let latestPostDiv = document.querySelector("#latestPosts");
+        let posts = getPostsSubsection(latestPosts, step);
+        latestPostDiv.innerHTML = postsToHTML(posts);
+    }
+
+    const getPostsSubsection = (posts, step) => {
+        if(posts.length < 5) return posts;
+        let start = step * 5;
+        let stop = start + 5;
+        if(stop > posts.length - 1) stop = posts.length - 1;
+        return posts.slice(start, stop)
+    }
+
+    const postsToHTML = posts => {
+        let html = ``;
+        for(let i = 0; i < posts.length; i++){
+            let replies = repliesToHTML(posts[i].replies);
+            html += `
+            <div class="post">
+                <a href="/user/${posts[i].user_id}"><img src=${posts[i].imageurl} class="img-post" /></a>
+                <div>
+                    <p>${posts[i].category}</p>
+                    <p>${posts[i].heading}</p>
+                    <p>${posts[i].details}</p>
+                    <p class="reply-count" onclick="toggleViewReplies(${posts[i].id})">${posts[i].replycount} replies</p>
+                    <div id="post-replies${posts[i].id}" class="replies">
+                        ${replies}
+                        <form class="reply-form" action="/user/${user.id}/post/${posts[i].id}/reply" method="POST">
+                            <textarea name="details" cols="49" rows="4" placeholder="Add your reply..."></textarea>
+                            <input type="submit">
+                        </form>
+                    </div><!-- end replies --> 
+                </div>
+            </div>
+            `
+        }
+        return html;
+    }
+
+    const repliesToHTML = replies => {
+        let html = ``;
+        for(let i = 0; i < replies.length; i++){
+            html += `
+                <div class="reply">
+                    <div class="rep-pfp">
+                        <!-- placeholder pfp for this reply -->
+                        <img src=${replies[i].imageurl} class="img-reply">
+                    </div>
+                    <div class="rep-msg">
+                        <p>${replies[i].details}</p>
+                    </div>
+                </div>   
+            `
+        }
+        return html;
+    }
+
+
+    if(latestPosts.length > 0){
+        setLatestPosts(0);
+    }
+
+</script>

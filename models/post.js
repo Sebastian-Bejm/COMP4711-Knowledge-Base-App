@@ -31,8 +31,8 @@ exports.getCategories = () => {
     p.senddate, p.replycount, u.imageurl
     FROM post as p
     JOIN user as u on p.user_id = u.id
-    WHERE p.user_id <> ${user_id}
-    ORDER BY senddate DESC
+    WHERE p.user_id = ${user_id}
+    ORDER BY senddate ASC
     LIMIT 10`;
 
     return db.execute(sql);
@@ -45,8 +45,7 @@ exports.getCategories = () => {
      JOIN user as u on p.user_id = u.id
      WHERE p.user_id <> ${state.user_id}
      ORDER BY senddate DESC
-     LIMIT 5`;
-
+     LIMIT 50`;
      return db.execute(sql);
  }
 
@@ -90,4 +89,23 @@ exports.getReplies = post_id => {
     `;
     await db.execute(sql);
     return db.execute(sql2);
+ }
+
+ exports.seedPosts = posts => {
+    let values = ``
+    for(let i = 0; i < posts.length; i++){
+        let post = posts[i];
+        values += `
+        (
+            '${post.user_id}',
+            '${post.category_id}',
+            '${post.heading}',
+            '${post.details}'
+        )${i == posts.length - 1 ? ";":","}
+        `
+    }
+    let sql = `Insert into post (user_id, category_id, heading, details) values
+       ${values}
+   `;
+   return db.execute(sql);
  }

@@ -4,6 +4,7 @@ const router = express.Router();
 const is_authenticated = require("../util/is-auth");
 
 
+router.get("/user/seeddb", userController.seedUsers);
 router.post('/signup', userController.createUser);
 router.get("/register", userController.getRegister);
 router.post("/register", userController.register);
