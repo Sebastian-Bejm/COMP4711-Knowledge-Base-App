@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Knowledge Base App</title>
-
+    
     <!-- CSS rendering -->
      <link rel="stylesheet" type="text/css" href="/css/main.css">
     {{#if homeCSS}} 
@@ -23,11 +23,14 @@
     {{/if}}
     {{#if usersHomeCSS}} 
         <link rel="stylesheet" type="text/css" href="/css/usersHome.css">
+        <script src="/js/usersHome.js" defer></script>
     {{/if}}
-     {{#if newMessageCSS}} 
+    {{#if newMessageCSS}} 
         <link rel="stylesheet" type="text/css" href="/css/newMessage.css">
     {{/if}}
-    
+    {{#if allMessagesCSS}} 
+        <link rel="stylesheet" type="text/css" href="/css/allMessages.css">
+    {{/if}}
     
 </head>
 <body>

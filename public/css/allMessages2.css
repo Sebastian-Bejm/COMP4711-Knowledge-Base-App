@@ -1,0 +1,54 @@
+
+.allMessages {
+    display: flex;
+    justify-content: center;
+    height: 600px;
+}
+
+.message {
+    cursor: pointer;
+}
+
+.messageList {
+    width: 300px;
+    overflow-y: auto;
+}
+
+.messageList img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border-color: aliceblue;
+    border-width: 2px;
+    border: 2px solid lightgray;
+}
+
+.messageReplies {
+    border: 1px solid lightgray;
+    width: 500px;
+    margin-left: 20px;
+    height: 600px;
+    overflow-y: auto;
+}
+
+.reply {
+    padding: 10px;
+}
+
+#reply-messageReplyForm {
+    margin-left: 10%;
+    margin-right: 10%;
+    text-align: right;
+}
+
+#reply-messageReplyForm textarea {
+    resize: none;
+}
+
+#messageReplyForm-form input[type="submit"] {
+    text-align: center;
+    padding: 5px;
+    color: white;
+    background-color: mediumslateblue;
+    border-color: mediumslateblue;
+}

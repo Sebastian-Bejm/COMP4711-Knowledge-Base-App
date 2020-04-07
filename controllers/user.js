@@ -64,11 +64,9 @@ exports.getUser = (req,res,next)=>{
 
 exports.getProfile = (req,res,next) =>{
     if(req.params.id == req.session.user.id){
-        console.log("ONE")
         return this.getUserHome(req,res,next);
     }
     if(req.params.id && req.params.id != "undefined"){
-        console.log("TWO")
         return this.getUserProfile(req,res,next);
     }
     res.status(404)        // HTTP status 404: NotFound
@@ -81,7 +79,7 @@ exports.getUserHome = async (req,res,next) => {
     latestPosts = await Promise.all(latestPosts.map(async post =>{
         let cat = categories.find(cat => cat.id == post.category_id);
         let [replies, metaData] = await postModel.getReplies(post.id);
-        replies = replies.length > 0? [].concat.apply([], replies) : [];
+        replies = [].concat.apply([], replies);
         return {
             ...post,
             replies: replies,

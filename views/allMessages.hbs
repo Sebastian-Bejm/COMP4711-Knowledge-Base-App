@@ -1,0 +1,88 @@
+{{>header}}
+
+<div class="all-messages"><!-- main container -->
+
+    <!-- list of conversations on left -->
+    <div class="message-list">
+        
+        {{#messages}}
+        <!-- one conversation to click on, and show the reply thread -->
+        <div class="single-message" onclick="setViewMessage({{id}})">
+            <div class="msg-pfp">
+                <img src={{imageurl}}>
+            </div>
+            <div class="msg-name">
+                <p>{{firstname}} {{lastname}}</p>
+                <p>{{subject}}</p>
+            </div>
+            <div class="msg-date">
+                <p>{{senddate}}</p>
+            </div>
+        </div>
+        {{/messages}}
+
+    </div><!-- end message-list -->
+
+    <!-- replies for a conversation on right -->
+    <div class="message-replies">
+        <div class="replies">
+
+        </div>
+
+        
+
+    </div><!-- end message-replies -->
+
+
+</div><!-- end all-messages -->
+
+
+<script>
+    const user = JSON.parse('{{{userData}}}');
+    const messagesData = JSON.parse('{{{messagesData}}}');
+    let activeId = '{{activeId}}';
+
+    const setViewMessage = id => {
+        let activeMessage = messagesData.find(message=>message.id == id);
+        //console.log(activeMessage);
+        let messageReplies = document.querySelector(".replies");
+        let firstMessage = createMessageNode(activeMessage);
+        let replies = activeMessage.replies.map(reply => createMessageNode(reply)).join('');
+        let replyForm = createReplyForm(activeMessage);
+        messageReplies.innerHTML = messageRepliesHeader+firstMessage+replies
+        messageReplies.insertAdjacentHTML('afterend', replyForm);;
+    }
+
+    const messageRepliesHeader = `
+        <div class="message-date-posted">
+            <p>Date Messages Sent</p>
+        </div>
+    `;
+
+    const createMessageNode = message =>{
+        return `
+            <!-- reply placeholder -->
+            <div class="message-reply">
+                <div class="msg-reply-pfp">
+                    <img src=${message.imageurl}>
+                </div>
+                <div class="msg-reply-body">
+                    <p>${message.firstname} ${message.lastname} &#9900; ${message.senddate}</p>
+                    <p>${message.details}</p>
+                </div>
+            </div>
+        `;
+    }
+
+    const createReplyForm = message => {
+        return `
+            <form class="message-reply-form" action="/user/${user.id}/message/${message.id}/reply" method="POST">
+                <textarea name="details" cols="130" rows="6" placeholder="Write a message..."></textarea>
+                <input type="submit" value="Send">
+            </form>
+        `;
+    }
+
+    setViewMessage(activeId);
+    
+</script>

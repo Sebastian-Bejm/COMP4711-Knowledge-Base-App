@@ -1,23 +1,22 @@
-
 {{>header}}
-<div id="home-section">
+<div id="home-section" class="flex">
     <div id="home-left">
-        <div >
+        <div class="center">
             <img class="img-profile" src={{user.imageurl}}>
         </div>
-        <div id="user-info">
-            <p id="name">{{user.firstname}} {{user.lastname}}</p>
-            <p id="user-desc">-User description-</p>
+        <div id="user-info" class="center">
+            <p id="name" class="big bold">{{user.firstname}} {{user.lastname}}</p>
+            <p id="user-desc" class="grey">{{user.about}}</p>
         </div>
         <div id="statistics">
-            <div><!-- post message likes area-->
-                <div id="stat-name">
-                    <a href="/user/{{user.id}}/post"><span>Posts</span></a>
-                    <p><span>Messages</span></p>
+            <div class="flex grey"><!-- post message likes area-->
+                <div id="stat-name" class="no-margin">
+                    <p><a href="/user/{{user.id}}/post" class="grey">Posts</a></p>
+                    <p><a href="/user/{{user.id}}/message" class="grey">Messages</a></p>
                     <p>Likes</p>
                 </div>
                 
-                <div id="stat-count">
+                <div id="stat-count" class="no-margin">
                     <p>{{user.postcount}}</p>
                     <p>{{user.messagecount}}</p>
                     <p>{{user.likes}}</p>
@@ -25,7 +24,7 @@
             </div>
             
             <div>
-                <p>Edit Profile</p>
+                <p><a href="" class="grey">Edit Profile</a></p>
             </div>
         </div><!-- end of statistics -->
     </div><!-- end of home-left -->
@@ -33,16 +32,16 @@
 
     <div id="home-right">
         {{#if latestPosts}}
-            <p>What's your question today?</p>
+            <p class="big-XL bold grey no-margin">What's your question today?</p>
             <form id="question-form" action="/user/{{user.id}}/post" method="POST">
-                <div id="typing-area">
-                    <input  name="heading" type="text" maxLength="40" placeholder="Subject" required>
-                    <textarea name="details" type="text" placeholder="Explain in detail..." cols="60" rows="8" required></textarea>
+                <div id="typing-area" class="flex">
+                    <input class="top-bottom-margin text-padding" name="heading" type="text" maxLength="40" placeholder="Subject" required>
+                    <textarea class="top-bottom-margin" name="details" type="text" placeholder="Explain in detail..." cols="30" rows="6" required></textarea>
                 </div>
                 
-                <div id="posting-area">
+                <div id="posting-area" class="top-bottom-margin-XL flex">
                     <div class="language-select">
-                        <select name="category" required>
+                        <select class="text-padding dropdown-selection" name="category" required>
                             <option value="" disabled selected>Topic</option>
                             {{#each categories}}
                                 <option value={{this.id}}>{{this.title}}</option>
@@ -51,18 +50,18 @@
                     </div><!-- end of language-select -->
                     
                     <div>
-                        <input id="post-button" type="submit" value="Post to timeline">
+                        <input id="post-button" class="text-padding post-button" type="submit" value="Post to timeline">
                     </div>
                 </div><!-- end of posting-area -->
             </form><!-- end of question-form -->
             
-            {{!-- <div id="search-section">
-                <div>
+            {{!-- <div id="search-section" class="flex">
+                <div class="no-margin right-margin text-padding">
                     <p>Search by topic</p>
                 </div>
                 
                 <div class="language-select">
-                    <select>
+                    <select class="text-padding dropdown-selection left-right-margin">
                         <option value="0">Topic</option>
                         <option value="1">html</option>
                         <option value="2">java</option>
@@ -71,29 +70,29 @@
                     </select>
                 </div><!-- end of language-select -->
                 <div>
-                    <button id="search button">go-></button>
+                    <button id="search button" class="go-button left">go-></button>
                 </div>
             </div><!-- end of search-section --> --}}
             
             <div class="discussion-area">
                 <div>
-                    <p>Latest discussions</p>
+                    <p class="big">Latest discussions</p>
                 </div>
                 <div>
                     {{#each latestPosts}}
                         <div>
-                            <a href="/user/{{this.user_id}}"><img src={{this.imageurl}} /></a>
+                            <a href="/user/{{this.user_id}}"><img src={{this.imageurl}} class="img-profile" /></a>
                             <p>{{this.category}}</p>
                             <p>{{this.heading}}</p>
                             <p>{{this.details}}</p>
-                            <p>{{this.replycount}} replies</p>
-                            <div class="replies">
+                            <p class="reply-count" onclick="toggleViewReplies({{this.id}})">{{this.replycount}} replies</p>
+                            <div id="post-replies{{this.id}}" class="replies">
                                 {{#each this.replies }}
                                     <!-- one reply -->
                                     <div class="reply">
                                         <div class="rep-pfp">
                                             <!-- placeholder pfp for this reply -->
-                                            <img src={{this.imageurl}}>
+                                            <img src={{this.imageurl}} class="img-profile">
                                         </div>
                                         <div class="rep-msg">
                                             <p>{{this.details}}</p>
@@ -113,29 +112,33 @@
         {{else}}
             <div class="discussion-area">
                 <div>
-                    <p>All Posts</p>
+                    <p class="big">All Posts</p>
                 </div>
                 <div>
                     {{#each userPosts}}
                         <div>
-                            <img src={{this.imageurl}} />
+                            <img src={{this.imageurl}} class="img-profile" />
                             <p>{{this.category}}</p>
                             <p>{{this.heading}}</p>
                             <p>{{this.details}}</p>
-                            <p>{{this.replycount}} replies</p>
-                            <div class="replies">
+                            <p class="reply-count" onclick="toggleViewReplies({{this.id}})">{{this.replycount}} replies</p>
+                            <div id="post-replies{{this.id}}" class="replies">
                                 {{#each this.replies }}
                                     <!-- one reply -->
                                     <div class="reply">
                                         <div class="rep-pfp">
                                             <!-- placeholder pfp for this reply -->
-                                            <img src={{this.imageurl}}>
+                                            <img src={{this.imageurl}} class="img-profile">
                                         </div>
                                         <div class="rep-msg">
                                             <p>{{this.details}}</p>
                                         </div>
                                     </div>
                                 {{/each}}
+                                <form class="reply-form" action="/user/{{../user.id}}/post/{{this.id}}/reply" method="POST">
+                                    <textarea name="details" cols="49" rows="4" placeholder="Add your reply..."></textarea>
+                                    <input type="submit">
+                                </form>
                             </div><!-- end replies --> 
                         </div>
                     {{/each}}

@@ -1,7 +1,162 @@
 .img-profile {
     width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 2px solid lightgray;
 }
 
 .discussion-area img {
     width: 100px;
+}
+
+ /*Base of the home section*/
+#home-section {
+    margin: auto;
+    min-height: 100%;
+    width: 1000px;
+    font-family: Verdana
+}
+
+
+#home-left {
+    flex-grow: 1;
+    padding: 50px 30px 0px 0px;
+    width: 280px;
+}
+
+#home-right {
+    flex-grow: 2;
+    padding: 10px 0px 0px 30px;
+}
+
+/*home-left stuff*/
+#statistics {
+    margin: auto;
+    padding: 30px 80px 0px 80px;
+}
+
+#stat-count {
+    padding-left: 20px;
+}
+
+/*home-right stuff*/
+textarea {
+    resize: none;
+}
+
+#typing-area {
+    flex-direction: column;
+    width: 300px;
+}
+
+#posting-area {
+    width: 300px;
+}
+
+.post-button {
+    color: deepskyblue;
+    border-color: deepskyblue;
+    background-color: transparent;
+    font-weight: bold;
+    width: 120px;
+}
+
+.go-button {
+    color: white;
+    border-color: transparent;
+    background-color: deepskyblue;
+    font-weight: bold;
+    width: 80px;
+    padding: 4px;
+}
+
+/*latest discussion section*/
+.discussion-area {
+    margin-top: 10px;
+    width: 400px;
+}
+
+/*Global css*/
+.flex {
+    display: flex;
+}
+
+.left {
+    text-align: left;
+}
+
+.center {
+    text-align: center;
+}
+
+.no-margin {
+    margin: 0px;
+}
+
+.no-margin p{
+    margin: 0px;
+}
+
+.top-bottom-margin-XL {
+    margin: 10px 0px;
+}
+
+.top-bottom-margin {
+    margin: 5px 0px;
+}
+
+.left-right-margin {
+    margin: 0px 5px;
+}
+
+.right-margin {
+    margin: 0px 10px 0px 0px;
+}
+
+.text-padding {
+    padding: 4px 0px;
+}
+
+.big {
+    font-size: 18px;
+}
+
+.big-XL {
+    font-size: 25px;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.grey {
+    color: darkslategray;
+}
+
+.black {
+    color: black;
+}
+
+.dropdown-selection {
+    color: deepskyblue;
+    border-color: deepskyblue;
+    font-weight: bold;
+    width: 200px;
+}
+
+.replies {
+    display: none;
+}
+
+.reply-count {
+    width: 100%;
+    cursor: pointer;
+}
+
+.reply-form {
+    display: flex;
+    flex-wrap: wrap;
+}
+.reply-form textarea {
+    width: 100%;
 }
