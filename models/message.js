@@ -28,10 +28,20 @@ exports.getAllMessages = user_id => {
 }
 
 exports.getMessageReplies = message_id => {
-    let sql = `SELECT mr.details, u.imageurl, mr.user_id, mr.id, mr.message_id
+    let sql = `SELECT mr.details, mr.user_id, mr.id, mr.message_id, mr.senddate, u.imageurl, u.firstname, u.lastname  
      FROM messagereply as mr
      JOIN user as u on mr.user_id = u.id
      WHERE mr.message_id = ${message_id}
-     ORDER BY senddate DESC`;
+     ORDER BY senddate ASC`;
      return db.execute(sql);
 }
+
+exports.addReply = data => {
+    let sql = `Insert into messagereply (user_id, message_id, details) values (
+        ${data.user_id},
+        ${data.message_id}, 
+        '${data.details}'
+    );
+    `;
+    return db.execute(sql);
+ }

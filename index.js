@@ -27,7 +27,7 @@ app.engine(
       defaultLayout: 'main-layout',
       extname: 'hbs',
       helpers: {
-        foo: function () { return 'FOO!'; },
+        foo: function () { console.log('FOO!'); },
         bar: function () { return 'BAR!'; },
         assign: function (varName, varValue, options) {
           console.log("varName",varName)

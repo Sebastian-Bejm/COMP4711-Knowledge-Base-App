@@ -53,15 +53,30 @@ exports.getAllMessages = (req,res,next) => {
             replies = [].concat.apply([], replies);
             return {
                 ...message,
-                replies: replies,
+                replies: replies,//`${JSON.stringify(replies)}`
                 imageurl: otherUser[0].imageurl,
                 firstname: otherUser[0].firstname,
                 lastname: otherUser[0].lastname
             }
         }));
         req.session.messages = messages;
-        res.render('allMessages', {allMessagesCSS: true, user: req.session.user, categories: req.session.categories, messages: messages });
+        res.render('allMessages', {allMessagesCSS: true, user: req.session.user, 
+            userData: JSON.stringify(req.session.user), categories: req.session.categories, 
+            messages: messages, messagesData: JSON.stringify(messages) });
     }).catch(err=>{
         console.log("err fetching messages...", err);
     })
+}
+
+exports.addReply = (req,res,next) => {
+    let data = {
+        user_id: req.params.id,
+        message_id: req.params.message_id,
+        details: req.body.details.trim()
+    }
+    messageModel.addReply(data).then(resp=>{
+        return res.redirect('back');
+     }).catch(err=>{
+         console.log(err,"err creating new reply");
+     })
 }

@@ -68,7 +68,7 @@ exports.getReplies = post_id => {
      FROM postreply as pr
      JOIN user as u on pr.user_id = u.id
      WHERE pr.post_id = ${post_id}
-     ORDER BY senddate DESC`;
+     ORDER BY senddate ASC`;
      return db.execute(sql);
 }
 
