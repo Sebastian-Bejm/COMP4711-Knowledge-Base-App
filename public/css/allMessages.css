@@ -1,21 +1,127 @@
+/** Messages list for this page */
 
-.allMessages {
+html {
+    height: 100%;
+}
+
+body {
+    height: 98%;
+}
+
+.all-messages {
+    display: flex;
+    height: 90%;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+.message-list {
+    width: 25%;
+    margin-right: 1%;
+    border-right: 1px solid lightgrey;
+}
+
+.single-message {
+    border: 0.5px solid lightgrey;
+    width: 100%;
     display: flex;
 }
 
-.messageList {
-    width: 300px;
+.msg-pfp {
+    height: auto;
+    padding-left: 5px;
+    padding-right: 5px;    
 }
 
-.messageList img {
+.msg-pfp img {
     width: 60px;
     height: 60px;
     border-radius: 50%;
     border-color: aliceblue;
     border-width: 2px;
     border: 2px solid lightgray;
+    margin-top: 10px;
 }
 
-.messageReplies {
+.msg-name {
+    width: 80%;
+    height: auto;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.msg-date {
+    width: 40%;
+    height: auto;
+    text-align: right;
+    padding-left: 5px;
+    padding-right: 10px;
+}
+
+/** Replies for this page */
+
+.message-replies {
+    position: relative;
+    width: 75%;
+    margin-left: 1%;
     border: 1px solid lightgray;
+}
+
+.message-date-posted {
+    text-align: center;
+    width: 100%;
+    height: auto;
+}
+
+.message-reply {
+    display: flex;
+    height: auto;
+}
+
+.msg-reply-pfp {
+    height: auto;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.msg-reply-pfp img {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    border-color: aliceblue;
+    border-width: 2px;
+    border: 2px solid lightgray;
+    margin-top: 15px;
+}
+
+.msg-reply-body {
+    width: 100%;
+    height: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.message-reply-form {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: right;
+    background-color: #f2f2f0;
+}
+
+.message-reply-form textarea {
+    display: block;
+    resize: none;
+    float: left;
+    width: 99.3%;
+    height: auto;
+}
+
+.message-reply-form input[type="submit"] {
+    padding: 5px;
+    color: white;
+    background-color: mediumslateblue;
+    border-color: mediumslateblue;
+    text-align: center;
+    margin: 10px 40px 10px 0px;
 }

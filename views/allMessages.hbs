@@ -1,19 +1,52 @@
 {{>header}}
 
-<div class="allMessages">
-    <div class="messageList">
-        {{#messages}}
-            <div onclick="assign('existingComments',this)">
-                <img src={{imageurl}}>
-                <p>{{firstname}} {{lastname}}</p>
-                <p>{{subject}}</p>
-                <p>{{senddate}}</p>
+<div class="all-messages"><!-- main container -->
+
+    <!-- list of conversations on left -->
+    <div class="message-list">
+        
+        <!-- one conversation to click on, and show the reply thread -->
+        <div class="single-message">
+            <div class="msg-pfp">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Gull_portrait_ca_usa.jpg">
             </div>
-        {{/messages}}
-    </div>
+            <div class="msg-name">
+                <p>Firstname Lastname</p>
+                <p>Subject</p>
+            </div>
+            <div class="msg-date">
+                <p>Date sent</p>
+            </div>
+        </div>
+        
 
-    <div class="messageReplies">
-        {{!-- {{@root.existingComments }} --}}
-    </div>
-</div>
+    </div><!-- end message-list -->
 
+    <!-- replies for a conversation on right -->
+    <div class="message-replies">
+
+        <div class="message-date-posted">
+            <p>Date Messages Sent</p>
+        </div>
+
+        <!-- reply placeholder -->
+        <div class="message-reply">
+            <div class="msg-reply-pfp">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Gull_portrait_ca_usa.jpg">
+            </div>
+            <div class="msg-reply-body">
+                <p>Firstname Lastname &#9900; Time Msg Sent</p>
+                <p>Message reply description</p>
+            </div>
+
+        </div>
+
+        <!-- bottom reply form, make collapsable later -->
+        <form class="message-reply-form">
+            <textarea name="reply" cols="130" rows="6" placeholder="Write a message..."></textarea>
+            <input type="submit" value="Send">
+        </form>
+
+    </div><!-- end message-replies -->
+
+</div><!-- end all-messages -->
