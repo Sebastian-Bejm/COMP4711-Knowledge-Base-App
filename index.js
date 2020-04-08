@@ -29,14 +29,11 @@ app.engine(
       helpers: {
         foo: function () { console.log('FOO!'); },
         bar: function () { return 'BAR!'; },
-        assign: function (varName, varValue, options) {
-          console.log("varName",varName)
-          console.log("Value",varValue)
-          console.log("OPTIONS",options)
-          if (!options.data.root) {
-              options.data.root = {};
-          }
-          options.data.root[varName] = varValue;
+        ifEquals: function(arg1, arg2, options) {
+          return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
+        },
+        ifNotEquals: function(arg1, arg2, options) {
+          return (arg1 != arg2) ? options.fn(this) : options.inverse(this);
         }
     }
     })

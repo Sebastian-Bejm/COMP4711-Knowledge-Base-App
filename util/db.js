@@ -7,7 +7,9 @@ const pool = mysql.createPool({
     user: 'bf02fe50141e00',
     database: 'heroku_11bab956933f1d3',
     password: '863bb7b4',
-    multipleStatements: true
+    multipleStatements: true,
+    waitForConnections: true,
+    connectionLimit: 5
 });
 
 module.exports = pool.promise();

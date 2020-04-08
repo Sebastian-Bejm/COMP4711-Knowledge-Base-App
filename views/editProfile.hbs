@@ -1,0 +1,15 @@
+{{>header}}
+
+<div class="edit-profile">
+    <img class="edit-profile-img" src={{user.imageurl}}>
+    <form class="edit-profile-form" action="/user/{{user.id}}/edit" method="POST">
+        <input type="text" name="firstname" value={{user.firstname}}>
+        <input type="text" name="lastname" value={{user.lastname}}>
+        <input type="text" name="imageurl" value={{user.imageurl}}>
+        <input type="text" name="country" value="{{user.country}}">
+        <input type="date" name="dob" value={{user.dob}}>
+        <textarea name="about" rows="8">{{user.about}}</textarea>
+        <button tye="submit">Save</button>
+    </form>
+    
+</div>
