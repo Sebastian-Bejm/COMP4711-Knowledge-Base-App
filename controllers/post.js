@@ -67,6 +67,20 @@ exports.getCategories = () => {
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+/**********************
+ * FOR SEEDING DATABASE
+ **********************/
 exports.seedPosts = (req,res,next) => {
     let newPosts = generatePosts();
     postModel.seedPosts(newPosts).then(resp=>{

@@ -12,7 +12,7 @@ exports.createUser = (data) => {
 
 exports.registerUser = (data) => {
     let sql = `UPDATE user SET 
-        imageUrl = '${data.imagerrl}', 
+        imageurl = '${data.imageurl}', 
         about = '${data.about}', 
         dob = '${data.dob}', 
         country = '${data.country}'
@@ -54,6 +54,33 @@ exports.getUserById = id => {
    return db.execute(sql);
  }
 
+ exports.editUser = user => {
+    let sql = `UPDATE user SET 
+    firstname = '${user.firstname}', 
+    lastname = '${user.lastname}', 
+    imageurl = '${user.imageurl}', 
+    about = '${user.about}', 
+    dob = '${user.dob}', 
+    country = '${user.country}'
+    WHERE
+        id = ${user.id}
+    ;
+`;
+return db.execute(sql);
+ }
+
+
+
+
+
+
+
+
+
+
+ /**********************
+ * FOR SEEDING DATABASE
+ **********************/
  exports.seedUsers = users => {
      let values = ``
      for(let i = 0; i < users.length; i++){

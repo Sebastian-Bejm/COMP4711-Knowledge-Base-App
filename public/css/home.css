@@ -9,12 +9,9 @@
     margin-top: 75px;
 }
 
-#kb-left-container {
-    margin-right: 6%;
-}
-
 #kb-right-container {
-    margin-left: 6%;
+    margin-left: 40px;
+    width: 500px;
 }
 
 #kb-img {
@@ -26,26 +23,35 @@
 }
 
 #kb-login-form input {
-    margin: 3px;
+    margin-left: 5px;
 }
 
 #kb-login-form input[type="text"] {
-    width: 135px;
-    padding: 3px;
+    width: 150px;
+    border: none;
+    padding: 5px 0px 5px 10px;
+    margin: 10px 3px;
+    border-radius: 5px;
+    box-shadow: 0 0 15px 3px rgba(0, 0, 0, 0.1), 0 0 6px 3px rgba(0, 0, 0, 0.05);
 }
 
 #kb-login-form input[type="submit"] {
-    width: 60px;
-    padding: 5px;
+    text-align: center;
+    padding: 1px 20px 3px 20px;
+    height: 30px;
+    background-color: #069FEB;
+    border: none;
     color: white;
-    background-color: mediumslateblue;
-    border-color: mediumslateblue;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 0 15px 3px rgba(0, 0, 0, 0.1), 0 0 6px 3px rgba(0, 0, 0, 0.05);
 }
 
 #kb-login-form input[type="submit"]:hover {
-    color: mediumslateblue;
+    color: #069FEB;
     background-color: white;
-    border-color: mediumslateblue;
+    border-color: #069FEB;
 }
 
 #kb-desc {
@@ -58,27 +64,31 @@
 }
 
 #kb-signup-form input {
-    margin: 7px 3px 7px 3px;
-    width: 95%;
-}
-
-#kb-signup-form input[type="text"] {
-    padding: 3px;
+    width: 100%;
+    border: none;
+    padding: 5px 10px;
+    margin: 5px auto;
+    border-radius: 5px;
+    box-shadow: 0 0 15px 3px rgba(0, 0, 0, 0.1), 0 0 6px 3px rgba(0, 0, 0, 0.05);
 }
 
 #kb-signup-form input[type="submit"] {
-    margin-left: 10px;
     text-align: center;
-    padding: 5px;
+    width: 300px;
+    padding: 8px 10px;
+    background-color: #069FEB;
+    border: none;
     color: white;
-    background-color: mediumslateblue;
-    border-color: mediumslateblue;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 0 15px 3px rgba(0, 0, 0, 0.1), 0 0 6px 3px rgba(0, 0, 0, 0.05);
 }
 
 #kb-signup-form input[type="submit"]:hover {
-    color: mediumslateblue;
+    color: #069FEB;
     background-color: white;
-    border-color: mediumslateblue;
+    border-color: #069FEB;
 }
 
 /* CSS related to the registerDetails view, uses some of the container css from home view */

@@ -1,6 +1,17 @@
 body  {
     margin: 0;
     padding: 0 0 100px 0;
+    font-family: 'Nunito', sans-serif !important;
+}
+
+button, input, textarea {
+    font-family: 'Nunito', sans-serif !important;
+}
+a {
+    text-decoration: none;
+}
+.text-color-blue {
+    color: #069FEB;
 }
 
 .navHeader {
@@ -10,11 +21,48 @@ body  {
 }
 
 .kbLogo {
-    flex-grow: 1;
+    text-decoration: none;
+}
+.kbLogo h1 {
+    margin: 5px 10px;
+    color: black;
+    font-weight: 600;
+}
+.kbLogo span {
+    color: #069FEB;
 }
 
 .searchForm {
     flex-grow: 3;
+}
+.searchForm input {
+    width: 200px;
+    padding: 5px 0px 5px 10px;
+    margin: 10px auto;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.searchForm select {
+    width: 100px;
+    padding: 5px 0px 5px 10px;
+    margin: 10px auto;
+    color:#069FEB;
+    border-radius: 5px;
+    border: 1px solid #069FEB;
+}
+
+.searchForm button {
+    text-align: center;
+    padding: 3px 10px;
+    background-color: #069FEB;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 0 15px 3px rgba(0, 0, 0, 0.1), 0 0 6px 3px rgba(0, 0, 0, 0.05);
 }
 
 .logoutForm {
@@ -23,12 +71,18 @@ body  {
     justify-content: flex-end;
     padding-right: 2rem;
 }
+
 .logoutBtn {
     text-align: center;
-    width: 100px;
-    height: 30px;
-    background-color:#069FEB;
-    color: white;
-    border: none;
     text-decoration: none;
+    padding: 5px 20px 3px 20px;
+    margin-top: 10px;
+    height: 25px;
+    background-color: #069FEB;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 0 15px 3px rgba(0, 0, 0, 0.1), 0 0 6px 3px rgba(0, 0, 0, 0.05);
 }

@@ -77,8 +77,6 @@ exports.getProfile = (req,res,next) =>{
 
 exports.getUserHome = async (req,res,next) => {
     let [categories, fieldData] = await postController.getCategories();
-    //console.log(req.session.latestPostStep)
-    req.session.latestPostStep = req.session.latestPostStep ? req.session.latestPostStep : 0;
     let [latestPosts, metaData] = await postController.getLatestPosts({user_id: req.session.user.id, step: req.session.latestPostStep});
     latestPosts = await Promise.all(latestPosts.map(async post =>{
         let cat = categories.find(cat => cat.id == post.category_id);
@@ -91,7 +89,7 @@ exports.getUserHome = async (req,res,next) => {
         }
     })).then(resp=>{
         req.session.categories = categories;
-        return res.render('usersHome', {usersHomeCSS: true, user: req.session.user, userData: JSON.stringify(req.session.user), categories: categories, latestPosts: JSON.stringify(resp), latestPostStep: req.session.latestPostStep });
+        return res.render('usersHome', {usersHomeCSS: true, user: req.session.user, userData: JSON.stringify(req.session.user), categories: categories, latestPosts: JSON.stringify(resp)});
     })
     
 }
@@ -109,7 +107,7 @@ exports.getCurrentUserPosts = async (req, res, next) => {
             category: cat.title
         }
     }));
-    res.render('usersHome', {usersHomeCSS: true, user: req.session.user, categories: categories, userPosts: posts });
+    res.render('usersHome', {usersHomeCSS: true, user: req.session.user, userData: JSON.stringify(req.session.user), categories: categories, userPosts: posts });
 }
 
 exports.getUserProfile = async (req,res,next) => {
@@ -148,6 +146,44 @@ exports.logout = (req, res, next) => {
      });
 }
 
+exports.getEditProfile = (req,res,next) =>{
+    res.render("editProfile", {editProfileCSS: true, user: req.session.user, categories: req.session.categories})
+}
+
+exports.editProfile = (req,res,next) => {
+    let userDetails = {
+        id: req.session.user.id,
+        firstname: req.body.firstname.replace(/\r?\n|\r/gm, "").trim(),
+        lastname: req.body.lastname.replace(/\r?\n|\r/gm, "").trim(),
+        imageurl: req.body.imageurl.replace(/\r?\n|\r/gm, "").trim(),
+        about: req.body.about.replace(/\r?\n|\r/gm, "").trim(),
+        dob: req.body.dob.replace(/\r?\n|\r/gm, "").trim(),
+        country: req.body.country.replace(/\r?\n|\r/gm, "").trim()
+    }
+    userModel.editUser(userDetails).then(data=>{
+        req.session.user = {
+            ...req.session.user,
+            ...userDetails
+        }
+        res.redirect(301, "/user/"+req.session.user.id)
+    }).catch(err=>{
+        console.log("error registering user...", err);
+    })
+}
+
+
+
+
+
+
+
+
+
+
+
+/**********************
+ * FOR SEEDING DATABASE
+ **********************/
 exports.seedUsers = (req,res,next) => {
     axios.get('https://randomuser.me/api/?results=10')
     .then(response => {

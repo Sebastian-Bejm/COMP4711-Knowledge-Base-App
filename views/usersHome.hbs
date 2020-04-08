@@ -11,8 +11,8 @@
         <div id="statistics">
             <div class="flex grey"><!-- post message likes area-->
                 <div id="stat-name" class="no-margin">
-                    <p><a href="/user/{{user.id}}/post" class="grey">Posts</a></p>
-                    <p><a href="/user/{{user.id}}/message" class="grey">Messages</a></p>
+                    <p><a  href="/user/{{user.id}}/post" class="text-color-blue">Posts</a></p>
+                    <p><a  href="/user/{{user.id}}/message" class="text-color-blue">Messages</a></p>
                     <p>Likes</p>
                 </div>
                 
@@ -24,7 +24,7 @@
             </div>
             
             <div>
-                <p><a href="" class="grey">Edit Profile</a></p>
+                <p><a  href="/user/{{user.id}}/edit" class="text-color-blue">Edit Profile</a></p>
             </div>
         </div><!-- end of statistics -->
     </div><!-- end of home-left -->
@@ -41,7 +41,7 @@
                 
                 <div id="posting-area" class="top-bottom-margin-XL flex">
                     <div class="language-select">
-                        <select class="text-padding dropdown-selection" name="category" required>
+                        <select class="dropdown-selection" name="category" required>
                             <option value="" disabled selected>Topic</option>
                             {{#each categories}}
                                 <option value={{this.id}}>{{this.title}}</option>
@@ -50,7 +50,7 @@
                     </div><!-- end of language-select -->
                     
                     <div>
-                        <input id="post-button" class="text-padding post-button" type="submit" value="Post to timeline">
+                        <input id="post-button" class="post-button" type="submit" value="Post to timeline">
                     </div>
                 </div><!-- end of posting-area -->
             </form><!-- end of question-form -->
@@ -60,52 +60,15 @@
                     <p class="big">Latest discussions</p>
                 </div>
                 <div id="latestPosts">
-                    {{!-- {{#each latestPosts}}
-                        <div class="post">
-                            <a href="/user/{{this.user_id}}"><img src={{this.imageurl}} class="img-post" /></a>
-                            <div>
-                                <p>{{this.category}}</p>
-                                <p>{{this.heading}}</p>
-                                <p>{{this.details}}</p>
-                                <p class="reply-count" onclick="toggleViewReplies({{this.id}})">{{this.replycount}} replies</p>
-                                <div id="post-replies{{this.id}}" class="replies">
-                                    {{#each this.replies }}
-                                        <!-- one reply -->
-                                        <div class="reply">
-                                            <div class="rep-pfp">
-                                                <!-- placeholder pfp for this reply -->
-                                                <img src={{this.imageurl}} class="img-reply">
-                                            </div>
-                                            <div class="rep-msg">
-                                                <p>{{this.details}}</p>
-                                            </div>
-                                        </div>
-                                    {{/each}}
-                                    <form class="reply-form" action="/user/{{../user.id}}/post/{{this.id}}/reply" method="POST">
-                                        <textarea name="details" cols="49" rows="4" placeholder="Add your reply..."></textarea>
-                                        <input type="submit">
-                                    </form>
-                                </div><!-- end replies --> 
-                            </div>
-                        </div>
-                    {{/each}} --}}
-                    <!------------ All the single messages are grouped here ------------->
                 </div>
                 <div class="paginate">
                     <button 
-                        {{!-- {{#ifEquals latestPostStep 0}}
-                            class="paginate-button disabled"
-                        {{/ifEquals}}
-                        {{#ifNotEquals latestPostStep 0}}
-                            href="/user/{{user.id}}/paginateLatestPosts/-1" 
-                            class="paginate-button"
-                        {{/ifNotEquals}} --}}
                         onclick="setLatestPosts(-1)"
                         class="paginate-button "
                         >
                         Prev
                     </button>
-                    <button onclick="setLatestPosts(-1)" class="paginate-button ">Next</button>
+                    <button onclick="setLatestPosts(1)" class="paginate-button ">Next</button>
                 </div>
             </div><!-- end of discussion-area -->
         {{else}}
@@ -148,13 +111,18 @@
 </div><!-- end of home-section -->
 
 <script>
-    const latestPosts = JSON.parse('{{{latestPosts}}}');
+    let lpString = '{{{latestPosts}}}';
+    const latestPosts = lpString.length > 0 ? JSON.parse('{{{latestPosts}}}'): [];
     const user = JSON.parse('{{{userData}}}');
     let step  = 0;
 
     const setLatestPosts = direction =>{
         if(latestPosts.length <= 0)return;
-        step += direction;
+        let newStep = step + direction;
+        if(newStep < 0 || newStep * 5 >= latestPosts.length - 1){
+            return;
+        }
+        step = newStep;
         let latestPostDiv = document.querySelector("#latestPosts");
         let posts = getPostsSubsection(latestPosts, step);
         latestPostDiv.innerHTML = postsToHTML(posts);
@@ -164,7 +132,7 @@
         if(posts.length < 5) return posts;
         let start = step * 5;
         let stop = start + 5;
-        if(stop > posts.length - 1) stop = posts.length - 1;
+        if(stop > posts.length - 1) stop = posts.length;
         return posts.slice(start, stop)
     }
 
@@ -174,17 +142,16 @@
             let replies = repliesToHTML(posts[i].replies);
             html += `
             <div class="post">
-                <a href="/user/${posts[i].user_id}"><img src=${posts[i].imageurl} class="img-post" /></a>
+                <a class="img-link" href="/user/${posts[i].user_id}"><img src=${posts[i].imageurl} class="img-post" /></a>
                 <div>
-                    <p>${posts[i].category}</p>
-                    <p>${posts[i].heading}</p>
+                    <p class="post-heading"><span class="post-subject">${posts[i].heading}</span><span class="category">${posts[i].category}</span></p>
                     <p>${posts[i].details}</p>
                     <p class="reply-count" onclick="toggleViewReplies(${posts[i].id})">${posts[i].replycount} replies</p>
                     <div id="post-replies${posts[i].id}" class="replies">
                         ${replies}
                         <form class="reply-form" action="/user/${user.id}/post/${posts[i].id}/reply" method="POST">
                             <textarea name="details" cols="49" rows="4" placeholder="Add your reply..."></textarea>
-                            <input type="submit">
+                            <input type="submit" value="Comment">
                         </form>
                     </div><!-- end replies --> 
                 </div>
@@ -199,11 +166,10 @@
         for(let i = 0; i < replies.length; i++){
             html += `
                 <div class="reply">
-                    <div class="rep-pfp">
-                        <!-- placeholder pfp for this reply -->
+                    <div class="reply-img">
                         <img src=${replies[i].imageurl} class="img-reply">
                     </div>
-                    <div class="rep-msg">
+                    <div class="reply-details">
                         <p>${replies[i].details}</p>
                     </div>
                 </div>   

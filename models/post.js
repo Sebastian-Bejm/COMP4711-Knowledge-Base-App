@@ -32,8 +32,7 @@ exports.getCategories = () => {
     FROM post as p
     JOIN user as u on p.user_id = u.id
     WHERE p.user_id = ${user_id}
-    ORDER BY senddate ASC
-    LIMIT 10`;
+    ORDER BY senddate ASC`;
 
     return db.execute(sql);
 }
@@ -57,7 +56,7 @@ exports.getCategories = () => {
      WHERE p.user_id <> ${searchData.user_id} ${searchData.query ? ` AND p.heading LIKE '%${searchData.query}%' `: ``} 
      ${searchData.category ? ` AND p.category_id = ${searchData.category}` : ``}
      ORDER BY senddate DESC
-     LIMIT 10
+     LIMIT 30
      `;
     return db.execute(sql);
  }
@@ -91,6 +90,16 @@ exports.getReplies = post_id => {
     return db.execute(sql2);
  }
 
+
+
+
+
+
+
+
+ /**********************
+ * FOR SEEDING DATABASE
+ **********************/
  exports.seedPosts = posts => {
     let values = ``
     for(let i = 0; i < posts.length; i++){

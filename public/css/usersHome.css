@@ -4,7 +4,6 @@
     margin: auto;
     min-height: 100%;
     width: 1000px;
-    font-family: Verdana
 }
 
 #home-left {
@@ -37,6 +36,23 @@ textarea {
     flex-direction: column;
     width: 300px;
 }
+#typing-area input {
+    width: 300px;
+    border: none;
+    padding: 5px 0px 5px 10px;
+    margin: 10px 0px;
+    border-radius: 5px;
+    box-shadow: 0 0 3px 2px rgba(0, 0, 0, 0.1);
+}
+
+#typing-area textarea {
+    width: 300px;
+    border: none;
+    padding: 5px 0px 5px 10px;
+    margin: 10px 0px;
+    border-radius: 5px;
+    box-shadow: 0 0 3px 2px rgba(0, 0, 0, 0.1);
+}
 
 #posting-area {
     width: 300px;
@@ -68,12 +84,40 @@ textarea {
     display: flex;
 }
 
+.post .img-link {
+    padding: 20px 20px 0px 20px;
+    height: 85px;
+    text-align: center;
+}
+
+.post .post-heading {
+    display: flex;
+    justify-content: space-between;
+}
+
+.post .post-subject {
+    font-weight: 600;
+}
+
+.post .category {
+    width: 60px;
+    padding: 3px 8px;
+    color:#069FEB;
+    border-radius: 5px;
+    border: 1px solid #069FEB;
+}
+
 .post-button {
-    color: deepskyblue;
-    border-color: deepskyblue;
-    background-color: transparent;
-    font-weight: bold;
-    width: 120px;
+    text-align: center;
+    margin-left: 10px;
+    padding: 3px 10px; 
+    background-color: #069FEB;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 0 15px 3px rgba(0, 0, 0, 0.1), 0 0 6px 3px rgba(0, 0, 0, 0.05);
 }
 
 .go-button {
@@ -88,7 +132,7 @@ textarea {
 /*latest discussion section*/
 .discussion-area {
     margin-top: 10px;
-    width: 400px;
+    width: 500px;
 }
 
 /*Global css*/
@@ -153,10 +197,11 @@ textarea {
 }
 
 .dropdown-selection {
-    color: deepskyblue;
-    border-color: deepskyblue;
-    font-weight: bold;
-    width: 200px;
+    width: 150px;
+    padding: 5px 0px 5px 10px;
+    color:#069FEB;
+    border-radius: 5px;
+    border: 1px solid #069FEB;
 }
 
 .replies {
@@ -168,12 +213,40 @@ textarea {
     cursor: pointer;
 }
 
+.reply {
+    display: flex;
+
+}
+
+.reply-img {
+    width: 70px;
+    margin-right: 10px;
+}
+
 .reply-form {
     display: flex;
     flex-wrap: wrap;
+    justify-content: flex-end;
 }
+
 .reply-form textarea {
     width: 100%;
+    border: none;
+    padding: 5px 0px 5px 10px;
+    margin: 10px auto;
+    border-radius: 5px;
+    box-shadow: 0 0 15px 3px rgba(0, 0, 0, 0.1), 0 0 6px 3px rgba(0, 0, 0, 0.05);
+}
+
+.reply-form input {
+    padding: 7px 20px;
+    background-color: #069FEB;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 0 15px 3px rgba(0, 0, 0, 0.1), 0 0 6px 3px rgba(0, 0, 0, 0.05);
 }
 
 .paginate {
@@ -182,12 +255,16 @@ textarea {
 }
 
 .paginate-button {
-    padding: 5px 15px;
-    color: deepskyblue;
-    background-color: transparent;
-    border: 1px solid deepskyblue;
+    text-align: center;
+    margin-left: 10px;
+    padding: 3px 10px; 
+    background-color: #069FEB;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    border-radius: 5px;
     cursor: pointer;
-    text-decoration: none;
+    box-shadow: 0 0 15px 3px rgba(0, 0, 0, 0.1), 0 0 6px 3px rgba(0, 0, 0, 0.05);
 }
 
 .disabled {

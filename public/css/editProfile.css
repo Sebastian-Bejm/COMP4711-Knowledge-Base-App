@@ -1,0 +1,43 @@
+
+.edit-profile {
+    text-align: center;
+}
+
+.edit-profile-img {
+    margin: 0 auto;
+    box-shadow: 0 0 15px 3px rgba(0, 0, 0, 0.1), 0 0 6px 3px rgba(0, 0, 0, 0.05);
+}
+
+.edit-profile-form {
+    width: 400px;
+    margin: 0 auto
+}
+
+.edit-profile-form input  {
+    width: 100%;
+    border: none;
+    padding: 5px 0px 5px 10px;
+    margin: 10px auto;
+    border-radius: 5px;
+    box-shadow: 0 0 15px 3px rgba(0, 0, 0, 0.1), 0 0 6px 3px rgba(0, 0, 0, 0.05);
+}
+
+.edit-profile-form textarea {
+    width: 100%;
+    border: none;
+    padding: 5px 0px 5px 10px;
+    margin: 10px auto;
+    border-radius: 5px;
+    box-shadow: 0 0 15px 3px rgba(0, 0, 0, 0.1), 0 0 6px 3px rgba(0, 0, 0, 0.05);
+} 
+
+.edit-profile-form button {
+    padding: 7px 80px;
+    background-color: #069FEB;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 0 15px 3px rgba(0, 0, 0, 0.1), 0 0 6px 3px rgba(0, 0, 0, 0.05);
+}

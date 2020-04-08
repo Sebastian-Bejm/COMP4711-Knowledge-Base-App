@@ -1,6 +1,6 @@
 <div class="navHeader">
     <a class="kbLogo" href="/user/{{user.id}}">
-        <img  src="/images/kblogo.png"/>
+        <h1>k<span>b</span></h1>
     </a>
     <form class="searchForm" action="/search" method="GET">
         <input name="searchQuery" type="text" placeholder="Search"/>
@@ -10,6 +10,7 @@
                 <option value={{this.id}}>{{this.title}}</option>
             {{/each}}                   
         </select>
+        <button type="submit">Go</button>
     </form>
     <div class="logoutForm"><a class="logoutBtn" href="/logout">Logout</a></div>
 </div>

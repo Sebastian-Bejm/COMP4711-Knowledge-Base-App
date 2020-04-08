@@ -6,7 +6,9 @@ let openRepliesId = null;
 const toggleViewReplies = id => {
     if(openRepliesId != null && openRepliesId != id){
       let previouslyOpen = document.querySelector(`#post-replies${openRepliesId}`);
-      previouslyOpen.style.display = "none";
+      if(previouslyOpen != null){
+        previouslyOpen.style.display = "none";
+      }
     }
     
     let repliesDiv = document.querySelector(`#post-replies${id}`);
