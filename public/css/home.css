@@ -3,15 +3,14 @@
 
 #main-container {
     height: 100%;
+    width: 800px;
     display: flex;
-    margin-left: 15%;
-    margin-right: 15%;
-    margin-top: 75px;
+    margin: 75px auto;
 }
 
 #kb-right-container {
-    margin-left: 40px;
-    width: 500px;
+    padding-left: 40px;
+    width: 400px;
 }
 
 #kb-img {
@@ -20,6 +19,10 @@
 
 #kb-login {
     width: 100%;
+}
+
+#kb-login-form {
+    width: 450px;
 }
 
 #kb-login-form input {
@@ -37,7 +40,7 @@
 
 #kb-login-form input[type="submit"] {
     text-align: center;
-    padding: 1px 20px 3px 20px;
+    padding: 1px 10px 3px 10px;
     height: 30px;
     background-color: #069FEB;
     border: none;
@@ -94,8 +97,7 @@
 /* CSS related to the registerDetails view, uses some of the container css from home view */
 
 #kb-info {
-    max-width: 75%;
-    min-width: 40%;
+    width: 400px;
 }
 
 #kb-info h2 {
@@ -104,31 +106,41 @@
 
 #kb-regis {
     margin-top: 80px;
+    width: 100%;
+}
+
+#kb-regis-form {
+    text-align: center;
+    width: 100%;
 }
 
 #kb-regis-form input {
-    margin: 7px 3px 7px 3px;
-    width: 95%;
+    width: 100%;
+    border: none;
+    padding: 5px 10px;
+    margin: 5px auto;
+    border-radius: 5px;
+    box-shadow: 0 0 15px 3px rgba(0, 0, 0, 0.1), 0 0 6px 3px rgba(0, 0, 0, 0.05);
 }
 
-#kb-regis-form input[type="text"] {
-    padding: 3px;
+#kb-regis-form textarea {
+    width: 100%;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 15px 3px rgba(0, 0, 0, 0.1), 0 0 6px 3px rgba(0, 0, 0, 0.05);
 }
 
-textarea {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    width: 97%;
-    resize: none;
-}
-
-#kb-regis-form input[type="submit"] {
-    margin-left: 10px;
-    text-align: center;
-    padding: 5px;
+#kb-regis-form button[type="submit"] {
+    padding: 7px 20px;
+    margin: 5px auto;
+    background-color: #069FEB;
+    border: none;
     color: white;
-    background-color: mediumslateblue;
-    border-color: mediumslateblue;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 0 15px 3px rgba(0, 0, 0, 0.1), 0 0 6px 3px rgba(0, 0, 0, 0.05);
 }
 
 #kb-regis-form input[type="submit"]:hover {

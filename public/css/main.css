@@ -10,6 +10,9 @@ button, input, textarea {
 a {
     text-decoration: none;
 }
+
+textarea { resize: none; }
+
 .text-color-blue {
     color: #069FEB;
 }
@@ -85,4 +88,12 @@ a {
     border-radius: 5px;
     cursor: pointer;
     box-shadow: 0 0 15px 3px rgba(0, 0, 0, 0.1), 0 0 6px 3px rgba(0, 0, 0, 0.05);
+}
+
+.error {
+    color: red;
+}
+
+#password_message {
+    display: none;
 }
