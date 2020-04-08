@@ -4,15 +4,22 @@ let postModel = require('../models/post');
 const postController = require('./post');
 
 
-exports.createUser = (req,res,next) => {
+exports.createUser = async (req,res,next) => {
     //NEED TO CHECK BOTH CONFIRM AND PASS MATCH
     let newUser = {
-        firstname: req.body.s_fName.replace(/\r?\n|\r/gm, "").trim(),
-        lastname: req.body.s_lName.replace(/\r?\n|\r/gm, "").trim(),
-        email: req.body.s_email.replace(/\r?\n|\r/gm, "").trim(),
+        firstname: req.body.s_fName.replace(/\r?\n|\r|'/gm, "").trim(),
+        lastname: req.body.s_lName.replace(/\r?\n|\r|'/gm, "").trim(),
+        email: req.body.s_email.replace(/\r?\n|\r|'/gm, "").trim(),
         password: req.body.s_pass.replace(/\r?\n|\r/gm, "").trim()
      }
-
+    req.session.newUser = newUser;
+    let [users, fdata] = await userModel.getUserByEmail(newUser.email);
+    if(users.length > 0){
+        req.session.errors = {
+            duplicateEmail: true
+        }
+        res.redirect("/");
+    }
     userModel.createUser(newUser).then(data=>{
         userModel.getUserByEmail(newUser.email)
         .then(([rows, fieldData])=>{
@@ -21,10 +28,12 @@ exports.createUser = (req,res,next) => {
                 ...rows[0],
                 ...newUser
             }
+            req.session.newUser = null;
+            req.session.errors.duplicateEmail = false;
             req.session.cookie.maxAge = 3600000; 
             res.redirect(301, "/register")
-        })
-    });
+        }).catch(err=>console.log("err fetching user by email", err))
+    }).catch(err=> console.log("err creating user", err))
 }
 
 exports.getRegister = (req,res,next)=>{
@@ -34,10 +43,10 @@ exports.getRegister = (req,res,next)=>{
 exports.register = (req, res, next) => {
     let userDetails = {
         id: req.session.user.id,
-        imageurl: req.body.r_imageURL.replace(/\r?\n|\r/gm, "").trim(),
-        about: req.body.r_about.replace(/\r?\n|\r/gm, "").trim(),
+        imageurl: req.body.r_imageURL.replace(/\r?\n|\r|'/gm, "").trim(),
+        about: req.body.r_about.replace(/\r?\n|\r|'/gm, "").trim(),
         dob: req.body.r_birth.replace(/\r?\n|\r/gm, "").trim(),
-        country: req.body.r_country.replace(/\r?\n|\r/gm, "").trim()
+        country: req.body.r_country.replace(/\r?\n|\r|'/gm, "").trim()
     }
     userModel.registerUser(userDetails).then(data=>{
         req.session.user = {
@@ -50,18 +59,20 @@ exports.register = (req, res, next) => {
     })
 }
 
-exports.getUser = (req,res,next)=>{
-    userModel.getUserByEmail(req.body.l_email)
-        .then(([rows, fieldData])=>{
-            delete rows[0].password;
-            req.session.user = {
-                ...rows[0]
-            }
-            req.session.cookie.maxAge = 3600000; 
-            res.redirect(301, "/user/"+req.session.user.id)
-        }).catch(err=>{
-            console.log("error fetching user...", err);
-        })
+exports.getUser = async (req,res,next)=>{
+    let [users, fdata] = await userModel.getUserByEmail(req.body.l_email);
+    if(users.length > 0 && req.body.l_pass == users[0].password){
+        delete users[0].password;
+        req.session.user = {
+            ...users[0]
+        }
+        req.session.errors.failedLogin = false;
+        req.session.cookie.maxAge = 3600000; 
+        res.redirect(301, "/user/"+req.session.user.id)
+    } else {
+        req.session.errors.failedLogin = true;
+        res.redirect("/");
+    }
 }
 
 exports.getProfile = (req,res,next) =>{
@@ -90,7 +101,7 @@ exports.getUserHome = async (req,res,next) => {
     })).then(resp=>{
         req.session.categories = categories;
         return res.render('usersHome', {usersHomeCSS: true, user: req.session.user, userData: JSON.stringify(req.session.user), categories: categories, latestPosts: JSON.stringify(resp)});
-    })
+    }).catch(err=>console.log("err fetching latest post replies",err))
     
 }
 
@@ -129,7 +140,20 @@ exports.getUserProfile = async (req,res,next) => {
 }
 
 exports.addLike = (req,res,next) => {
-    userModel.addLike(req.params.id).then(resp=>{
+    let likes = req.session.likes;
+    let value = 1;
+    if(likes){
+        let newLikeIndex = likes.indexOf(req.params.id);
+        if(newLikeIndex >= 0){
+            req.session.likes.splice(newLikeIndex,1);
+            value = -1;
+        } else {
+            req.session.likes.push(req.params.id);
+        }
+    } else {
+        req.session.likes = [req.params.id];
+    }
+    userModel.addLike({id:req.params.id, value:value}).then(resp=>{
         return res.redirect('back');
     }).catch(err=>{
         console.log(err,"err adding like");
@@ -139,7 +163,7 @@ exports.addLike = (req,res,next) => {
 exports.logout = (req, res, next) => {
     req.session.destroy(function(err){
         if(err){
-           console.log(err);
+           console.log("err destroying session", err);
         }else{
             res.redirect('/');
         }
@@ -153,12 +177,12 @@ exports.getEditProfile = (req,res,next) =>{
 exports.editProfile = (req,res,next) => {
     let userDetails = {
         id: req.session.user.id,
-        firstname: req.body.firstname.replace(/\r?\n|\r/gm, "").trim(),
-        lastname: req.body.lastname.replace(/\r?\n|\r/gm, "").trim(),
-        imageurl: req.body.imageurl.replace(/\r?\n|\r/gm, "").trim(),
-        about: req.body.about.replace(/\r?\n|\r/gm, "").trim(),
+        firstname: req.body.firstname.replace(/\r?\n|\r|'/gm, "").trim(),
+        lastname: req.body.lastname.replace(/\r?\n|\r|'/gm, "").trim(),
+        imageurl: req.body.imageurl.replace(/\r?\n|\r|'/gm, "").trim(),
+        about: req.body.about.replace(/\r?\n|\r|'/gm, "").trim(),
         dob: req.body.dob.replace(/\r?\n|\r/gm, "").trim(),
-        country: req.body.country.replace(/\r?\n|\r/gm, "").trim()
+        country: req.body.country.replace(/\r?\n|\r|'/gm, "").trim()
     }
     userModel.editUser(userDetails).then(data=>{
         req.session.user = {

@@ -15,6 +15,9 @@
                 <input type="text" name="l_email" placeholder="Email" required>
                 <input type="text" name="l_pass" placeholder="Password" required>
                 <input type="submit" value="Login">
+                {{#if errors.failedLogin}}
+                <label class="error">Failed Login!</label>
+                {{/if}}
             </form>
         </div>
         <div id="kb-signup">
@@ -22,11 +25,16 @@
                 <h1>Join the worlds largest community for knowledge sharing</h1>
             </div>  
             <form id="kb-signup-form" action="/signup" method="POST">
-                <input type="text" name="s_fName" placeholder="Firstname" required>
-                <input type="text" name="s_lName" placeholder="Lastname" required>
-                <input type="text" name="s_email" placeholder="Email" required>
-                <input type="text" name="s_pass" placeholder="Password" required>
-                <input type="text" name="s_confirmPass" placeholder="Confirm Password" required>
+                <input type="text" name="s_fName" placeholder="Firstname" value='{{newUser.firstname}}' required>
+                <input type="text" name="s_lName" placeholder="Lastname" value='{{newUser.lastname}}' required>
+                {{#if errors.duplicateEmail}}
+                    <label class="error">This email already exists!</label>
+                {{/if}}
+                <input type="text" name="s_email" placeholder="Email" value='{{newUser.email}}' required>
+                <label class="password_label">Password Format (4-12 chars, no special characters)</label>
+                <input type="password" pattern="[A-Za-z0-9]{4,12}$" name="s_pass" id="password" onkeyup='check();' placeholder="Password" required>
+                <input type="password" name="s_confirmPass" id="confirm_password"  onkeyup='check();' placeholder="Confirm Password" required>
+                <label id="password_message"></label>
                 <input type="submit" value="Signup">
             </form>
         </div>

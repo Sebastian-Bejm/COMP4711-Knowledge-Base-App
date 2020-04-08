@@ -5,8 +5,8 @@ exports.createPost = (req,res,next) => {
     let newPost = {
         user_id: req.session.user.id,
         category_id: parseInt(req.body.category),
-        heading: req.body.heading.replace(/\r?\n|\r/gm, "").trim(),
-        details: req.body.details.replace(/\r?\n|\r/gm, "").trim()
+        heading: req.body.heading.replace(/\r?\n|\r|'/gm, "").trim(),
+        details: req.body.details.replace(/\r?\n|\r|'/gm, "").trim()
      }
     postModel.createPost(newPost).then(data=>{
        req.session.user.postcount++;
@@ -27,7 +27,7 @@ exports.getLatestPosts = state => {
 exports.search = (req,res,next) =>{
     let searchData = req.query.searchQuery || req.query.category ? {
         user_id: req.session.user.id,
-        query: req.query.searchQuery.replace(/\r?\n|\r/gm, "").trim(),
+        query: req.query.searchQuery.replace(/\r?\n|\r|'/gm, "").trim(),
         category: req.query.category
     } : req.session.searchData
     postModel.search(searchData).then(async ([results, fieldData])=>{
@@ -53,7 +53,7 @@ exports.addReply = (req,res,next) => {
     let data = {
         user_id: req.params.id,
         post_id: req.params.post_id,
-        details: req.body.details.replace(/\r?\n|\r/gm, "").trim()
+        details: req.body.details.replace(/\r?\n|\r|'/gm, "").trim()
     }
     postModel.addReply(data).then(resp=>{
         return res.redirect('back');

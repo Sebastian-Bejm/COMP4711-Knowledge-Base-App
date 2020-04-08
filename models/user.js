@@ -23,11 +23,11 @@ exports.registerUser = (data) => {
     return db.execute(sql);
 }
 
-exports.addLike = id => {
+exports.addLike = data => {
     let sql = `UPDATE user SET 
-        likes = likes + 1
+        likes = likes + ${data.value}
         WHERE
-            id = ${id}
+            id = ${data.id}
         ;
     `;
     return db.execute(sql);
