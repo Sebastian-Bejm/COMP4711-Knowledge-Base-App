@@ -78,12 +78,17 @@
                 </div>
                 <div>
                     {{#each userPosts}}
-                        <div>
-                            <img src={{this.imageurl}} class="img-post" />
-                            <p>{{this.category}}</p>
-                            <p>{{this.heading}}</p>
-                            <p>{{this.details}}</p>
+                        <div class="MyPost">
+                            <img src={{this.imageurl}} class="MyImage" />
+                            <div class="MyContent">
+                                <div class="MyHCDiv"> 
+                            <p class="MyHeading">{{this.heading}}</p>
+                            <p class="MyCategory">{{this.category}}</p>
+                                </div>
+                            <p class="MyDetail">{{this.details}}</p>
+                                <div class="MyTRDiv">
                             <p class="reply-count" onclick="toggleViewReplies({{this.id}})">{{this.replycount}} replies</p>
+                                </div>
                             <div id="post-replies{{this.id}}" class="replies">
                                 {{#each this.replies }}
                                     <!-- one reply -->
@@ -102,6 +107,7 @@
                                     <input type="submit">
                                 </form>
                             </div><!-- end replies --> 
+                            </div><!-- end conetnt -->
                         </div>
                     {{/each}}
                 </div>
