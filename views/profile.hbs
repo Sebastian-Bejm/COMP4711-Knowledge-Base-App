@@ -67,11 +67,12 @@
                         </div>
                     </div>
             {{/replies }}
-        </div>
-        <form class="reply-form" action="/user/{{../user.id}}/post/{{id}}/reply" method="POST">
-                <textarea name="details" cols="49" rows="4" placeholder="Add your reply..."></textarea>
-                <input type="submit">
+            <form class="reply-form" action="/user/{{../user.id}}/post/{{id}}/reply" method="POST">
+                <textarea class="replyBox" name="details" cols="49" rows="4" placeholder="Add your reply..."></textarea>
+                <input class="submitBtn" type="submit">
         </form> 
+        </div>
+        
         {{/posts}} 
     </div> 
     

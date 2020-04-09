@@ -79,7 +79,11 @@ textarea {
     border-radius: 50%;
     border: 2px solid lightgray;
 }
-
+.rep-msg{
+    margin-left: 3%;
+    word-wrap: break-word;
+    width: 80%;
+}
 .post {
     display: flex;
 }
@@ -209,13 +213,16 @@ textarea {
 }
 
 .reply-count {
-    width: 100%;
+    width: 30%;
     cursor: pointer;
+    text-decoration: underline;
+    float: right;
 }
 
 .reply {
     display: flex;
-
+    margin-top: 5%;
+    margin-bottom: 5%;
 }
 
 .reply-img {
@@ -227,6 +234,7 @@ textarea {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-end;
+    margin-bottom: 10%;
 }
 
 .reply-form textarea {
@@ -270,3 +278,51 @@ textarea {
 .disabled {
     cursor: not-allowed;
 }
+
+.MyPost {
+    display: flex;
+    margin: 5%, 5%, 5%, 5%;
+}
+.MyImage {
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    border: 2px solid lightgray;
+}
+.MyContent {
+    width: 100%
+}
+.MyHCDiv{
+    display: flex;
+    margin-left: 3%;
+}
+.MyCategory {
+    float: right;
+    border: solid;
+    border-color: skyblue;
+    border-width: 1px;
+    color: skyblue;
+    font-weight: bold;
+    margin: 1px 1px 1px 1px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+.MyHeading {
+    font-weight: bold;
+    font-size: 120%;
+    width: 90%;
+    margin: 1px 1px 1px 1px;
+}
+.MyDetail{
+    margin-left: 5%;
+    word-break: normal;
+
+}
+.MyTRDiv{
+    display: flex;
+}
+.MyDate{
+    margin-right: 15%;
+}
+
+
