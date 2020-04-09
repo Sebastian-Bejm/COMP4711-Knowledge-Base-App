@@ -146,7 +146,8 @@
 
 .msg-desc {
     width: 99%;
-    text-align: center;
+    margin-left: 10px;
+    word-wrap: break-word;
 }
 
 .msg-desc p {
@@ -176,8 +177,8 @@
 
 .reply{
     display: flex;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
     
 }
 .rep-msg{
