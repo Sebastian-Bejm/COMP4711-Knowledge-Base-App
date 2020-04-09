@@ -63,7 +63,7 @@ exports.getAllMessages = (req,res,next) => {
             }));
             req.session.activeMessageId = req.session.activeMessageId ? req.session.activeMessageId : messages[0].id;
         } else {
-            req.session.activeMessageId = req.session.activeMessageId ? req.session.activeMessageId : -1;
+            req.session.activeMessageId = req.session.activeMessageId ? req.session.activeMessageId : null;
         }
         
         res.render('allMessages', {allMessagesCSS: true, user: req.session.user, 

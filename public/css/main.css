@@ -93,6 +93,9 @@ textarea { resize: none; }
 .error {
     color: red;
 }
+.error-login {
+    width: 100%;
+}
 
 #password_message {
     display: none;

@@ -33,10 +33,12 @@
         <div class="replies">
 
         </div>
-        <form class="message-reply-form" action="/user/${user.id}/message/${message.id}/reply" method="POST">
+        {{#if activeId}}
+        <form class="message-reply-form" action="/user/{{user.id}}/message/{{activeId}}/reply" method="POST">
             <textarea name="details" cols="130" rows="6" placeholder="Write a message..."></textarea>
             <button type="submit">Send</button>
         </form>
+        {{/if}}
         
 
     </div><!-- end message-replies -->

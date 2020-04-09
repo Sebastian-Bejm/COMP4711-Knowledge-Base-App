@@ -27,6 +27,8 @@
 
 #kb-login-form {
     width: 450px;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 #kb-login-form input {
@@ -45,6 +47,7 @@
 #kb-login-form button {
     text-align: center;
     padding: 1px 10px 3px 10px;
+    margin: 10px 0px;
     height: 30px;
     background-color: #069FEB;
     border: none;
