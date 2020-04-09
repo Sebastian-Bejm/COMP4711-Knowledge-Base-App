@@ -8,6 +8,10 @@
     margin: 75px auto;
 }
 
+.base {
+    color: #069FEB;
+}
+
 #kb-right-container {
     padding-left: 40px;
     width: 400px;
