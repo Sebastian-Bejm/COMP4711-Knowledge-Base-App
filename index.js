@@ -60,7 +60,9 @@ app.use(messageRoutes);
 
 
 app.get("/", (req,res)=>{
-  res.render("homepage", {homeCSS: true});
+  req.session.errors = req.session.errors ? req.session.errors : {}; 
+  req.session.newUser = req.session.newUser ? req.session.newUser : {}; 
+  res.render("homepage", {homeCSS: true, newUser: req.session.newUser, errors: req.session.errors});
 })
 
 app.listen(PORT, () => console.log('Server listening on port '+PORT))
