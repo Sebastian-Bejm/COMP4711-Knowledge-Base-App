@@ -87,6 +87,7 @@
                                 </div>
                             <p class="MyDetail">{{this.details}}</p>
                                 <div class="MyTRDiv">
+                                <p class= "MyDate">{{senddate}}</p>
                             <p class="reply-count" onclick="toggleViewReplies({{this.id}})">{{this.replycount}} replies</p>
                                 </div>
                             <div id="post-replies{{this.id}}" class="replies">
@@ -152,6 +153,7 @@
                 <div>
                     <p class="post-heading"><span class="post-subject">${posts[i].heading}</span><span class="category">${posts[i].category}</span></p>
                     <p>${posts[i].details}</p>
+                    <p>${posts[i].senddate}</p>
                     <p class="reply-count" onclick="toggleViewReplies(${posts[i].id})">${posts[i].replycount} replies</p>
                     <div id="post-replies${posts[i].id}" class="replies">
                         ${replies}

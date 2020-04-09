@@ -213,10 +213,10 @@ textarea {
 }
 
 .reply-count {
-    width: 100%;
+    width: 30%;
     cursor: pointer;
     text-decoration: underline;
-    margin-left: 80%;
+    
 }
 
 .reply {
@@ -234,6 +234,7 @@ textarea {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-end;
+    margin-bottom: 10%;
 }
 
 .reply-form textarea {
@@ -280,6 +281,7 @@ textarea {
 
 .MyPost {
     display: flex;
+    margin: 5%, 5%, 5%, 5%;
 }
 .MyImage {
     height: 80px;
@@ -317,6 +319,7 @@ textarea {
 
 }
 .MyTRDiv{
+    display: flex;
 }
 
 
