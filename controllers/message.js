@@ -46,21 +46,26 @@ exports.sendMessage = (req,res,next) => {
 
 exports.getAllMessages = (req,res,next) => {
     messageModel.getAllMessages(req.session.user.id).then(async ([messages, fieldData])=>{
-        messages = await Promise.all(messages.map(async message=>{
-            let sender = message.sender_id == req.session.user.id;
-            let [otherUser, fieldData] = await userModel.getUserForMessage(sender? message.receiver_id:message.sender_id);
-            let [replies, metaData] = await messageModel.getMessageReplies(message.id);
-            replies = [].concat.apply([], replies);
-            return {
-                ...message,
-                replies: replies,//`${JSON.stringify(replies)}`
-                imageurl: otherUser[0].imageurl,
-                firstname: otherUser[0].firstname,
-                lastname: otherUser[0].lastname
-            }
-        }));
         req.session.messages = messages;
-        req.session.activeMessageId = req.session.activeMessageId ? req.session.activeMessageId : messages[0].id;
+        if(messages.length > 0){
+            messages = await Promise.all(messages.map(async message=>{
+                let sender = message.sender_id == req.session.user.id;
+                let [otherUser, fieldData] = await userModel.getUserForMessage(sender? message.receiver_id:message.sender_id);
+                let [replies, metaData] = await messageModel.getMessageReplies(message.id);
+                replies = [].concat.apply([], replies);
+                return {
+                    ...message,
+                    replies: replies,//`${JSON.stringify(replies)}`
+                    imageurl: otherUser[0].imageurl,
+                    firstname: otherUser[0].firstname,
+                    lastname: otherUser[0].lastname
+                }
+            }));
+            req.session.activeMessageId = req.session.activeMessageId ? req.session.activeMessageId : messages[0].id;
+        } else {
+            req.session.activeMessageId = req.session.activeMessageId ? req.session.activeMessageId : -1;
+        }
+        
         res.render('allMessages', {allMessagesCSS: true, user: req.session.user, 
             userData: JSON.stringify(req.session.user), categories: req.session.categories, 
             messages: messages, messagesData: JSON.stringify(messages), activeId: req.session.activeMessageId });

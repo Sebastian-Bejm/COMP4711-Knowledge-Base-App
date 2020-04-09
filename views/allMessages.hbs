@@ -25,6 +25,9 @@
 
     <!-- replies for a conversation on right -->
     <div class="message-replies">
+        <div class="message-date-posted">
+            <p>Messages Replies</p>
+        </div>
         <div class="replies">
 
         </div>
@@ -49,7 +52,7 @@
         let firstMessage = createMessageNode(activeMessage);
         let replies = activeMessage.replies.map(reply => createMessageNode(reply)).join('');
         let replyForm = createReplyForm(activeMessage);
-        messageReplies.innerHTML = messageRepliesHeader+firstMessage+replies
+        messageReplies.innerHTML = firstMessage+replies;//messageRepliesHeader+
         messageReplies.insertAdjacentHTML('afterend', replyForm);;
     }
 
@@ -82,7 +85,8 @@
             </form>
         `;
     }
-
-    setViewMessage(activeId);
+    if(messagesData.length > 0){
+        setViewMessage(activeId);
+    }
     
 </script>
