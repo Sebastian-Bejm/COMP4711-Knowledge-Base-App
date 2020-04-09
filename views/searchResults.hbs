@@ -6,7 +6,8 @@
      {{#results }}
         <div class="MyPost">
             
-                <img class="MyImage" src={{imageurl}}>
+                
+                <a href="/user/{{user_id}}"><img class="MyImage" src={{imageurl}}></a>
                 <div class="MyContent">
                     <div class="MyHCDiv">
                         <p class="MyHeading">{{heading}}</p>
@@ -17,13 +18,12 @@
 
                     <div class="MyTRDiv">
                         <p class="MyDate">{{senddate}}</p>
-                        <p class="reply-count">{{replycount}} replies</p>
+                        <p class="reply-count" onclick="toggleSearchReplies({{id}})">{{replycount}} replies</p>
                     </div>
                 
 
             <!-- show replies under result -->
-            <div class="replies">
-
+            <div class="replies" id="search-replies{{id}}">
                 {{#replies }}
                     <!-- one reply -->
                     <div class="reply">
@@ -36,12 +36,12 @@
                         </div>
                     </div>
                 {{/replies }}
-                    
+                <form class="reply-form" action="/user/{{../user.id}}/post/{{this.id}}/reply" method="POST">
+                    <textarea class="textfield" name="details" cols="49" rows="4" placeholder="Add your reply..."></textarea>
+                    <input class="submitBtn" type="submit">
+                </form> 
             </div><!-- end replies -->
-            <form class="reply-form" action="/user/{{../user.id}}/post/{{this.id}}/reply" method="POST">
-                <textarea class="textfield" name="details" cols="49" rows="4" placeholder="Add your reply..."></textarea>
-                <input class="submitBtn" type="submit">
-            </form> 
+            
             </div>
         </div><!-- end single result -->      
     {{/results}}

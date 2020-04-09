@@ -44,43 +44,39 @@
 .profile-right {
     float:right;
     padding: 100px 20px 100px;
+    color: black;
 }
 
-.button {
-    background-color: .008CBA; /* Green */
-    border: none;
-    border-radius: 4px;
-    color: white;
-    padding: 10px 20px;
+.profile-right .num-likes, .profile-right .num-posts {
+    color: black;
+}
+
+
+.profile-message-button {
     text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
+    padding: 5px 10px; 
+    background-color: #069FEB;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    border-radius: 5px;
     cursor: pointer;
+    box-shadow: 0 0 15px 3px rgba(0, 0, 0, 0.1), 0 0 6px 3px rgba(0, 0, 0, 0.05);
 }
 
-.num-likes p{
-    color:blue;
-}
 
 .num-likes .add-button{
-    margin-left: 10px;
-    padding: 5px 10px;
-    background-color: .008CBA; /* Green */
-    border: none;
-    border-radius: 50%;
-    color: white;
     text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-
+    height: 10px;
+    padding: 0px 7px;
+    margin-left: 5px; 
+    background-color: #069FEB;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    border-radius: 5px;
     cursor: pointer;
-}
-
-.num-posts {
-        color:blue;
+    box-shadow: 0 0 15px 3px rgba(0, 0, 0, 0.1), 0 0 6px 3px rgba(0, 0, 0, 0.05);
 }
 
 .profile-middle {
@@ -93,10 +89,9 @@
     margin: auto;
     margin-top: 10px;
     margin-bottom: 10px;
-    width: 470px;
+    width: 600px;
     height: auto;
     padding: 4px;
-    border: 2px solid lightgray;
 }
 
 .pfp {
@@ -133,15 +128,17 @@
 
 .topic {
     display: inline-block;
-    width: 22%;
-    background-color: white;
-    color: lightskyblue;
     text-align: center;
+    float: right;
 }
 
 .topic p {
-    border: 1px solid lightskyblue;
-    margin: 5px;
+    width: 60px;
+    height: 20px;
+    padding: 3px 8px;
+    color:#069FEB;
+    border-radius: 5px;
+    border: 1px solid #069FEB;
 }
 
 .msg-desc {
@@ -168,6 +165,7 @@
     text-align: right;
     width: 48%;
     display: inline-block;
+    cursor: pointer;
 }
 
 .num-replies p {
@@ -179,26 +177,37 @@
     display: flex;
     margin-top: 20px;
     margin-bottom: 20px;
-    
 }
 .rep-msg{
     width: 70%;
     word-wrap: break-word;
 }
+
+.replies {
+    display: none;
+}
+
 .reply-form{
     
 }
 .replyBox{
-    border: solid;
-    border-width: 1.5px;
-    border-color: lightgray;
-    width: 90%;
+    width: 100%;
+    border: none;
+    padding: 5px 0px 5px 10px;
+    box-sizing: border-box;
+    margin: 10px auto;
+    border-radius: 5px;
+    box-shadow: 0 0 15px 3px rgba(0, 0, 0, 0.1), 0 0 6px 3px rgba(0, 0, 0, 0.05);
 }
 .submitBtn{
-    background-color: rgb(0, 183, 255);
-    border-style: none;
-    color: white;
-    font-size: 100%;
     float: right;
-    margin-right: 10%;
+    padding: 3px 10px; 
+    box-sizing: border-box;
+    background-color: #069FEB;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 0 15px 3px rgba(0, 0, 0, 0.1), 0 0 6px 3px rgba(0, 0, 0, 0.05);
 }

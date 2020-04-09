@@ -3,22 +3,20 @@ const app = express();
 const path = require('path');
 const bodyParser = require('body-parser');
 const session = require('express-session');
+const expressSanitizer = require('express-sanitizer');
 const PORT = process.env.PORT || 5000
+
+const sanit = require("./util/sanit");
 
 app.use(express.static(path.join(__dirname,'public')));
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }))
 // parse application/json
 app.use(bodyParser.json())
+app.use(expressSanitizer());
+app.use(sanit);
 
 const expressHbs = require('express-handlebars');
-// var hbs = expressHbs.create({
-//   // Specify helpers which are only registered on this instance.
-//   helpers: {
-//       foo: function () { return 'FOO!'; },
-//       bar: function () { return 'BAR!'; }
-//   }
-// });
 
 app.engine(
     'hbs',

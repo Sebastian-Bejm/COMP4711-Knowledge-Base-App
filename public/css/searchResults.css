@@ -96,6 +96,7 @@
 /** CSS for replies, migrate later */
 
 .replies {
+    display: none;
 }
 
 .reply {

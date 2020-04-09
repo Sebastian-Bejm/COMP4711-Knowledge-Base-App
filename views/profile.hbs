@@ -17,10 +17,10 @@
         
         <div class="profile-right">
             <a href="/user/{{userProfile.id}}/message/new">
-                <button class="button">Message</button>
+                <button class="profile-message-button">Message</button>
             </a>
-            <div class="num-likes">
-                <p>{{userProfile.likes}} Likes<a href="/user/{{userProfile.id}}/likes" class="add-button">+</a></p>
+            <div>
+                <p class="num-likes">{{userProfile.likes}} Likes<a href="/user/{{userProfile.id}}/likes" class="add-button">+</a></p>
             </div>
             <div class="num-posts">
                 <p>{{userProfile.postcount}} Posts</p>
@@ -53,9 +53,10 @@
             </div>
             <div class="num-replies">
                 <!-- retrieve replies on click -->
-                <p>{{replycount}} replies</p>
+                <p onclick="toggleProfileReplies({{id}})" >{{replycount}} replies</p>
             </div>
-            {{#replies }}
+            <div class="replies" id="profile-replies{{id}}">
+                {{#replies }}
                     <!-- one reply -->
                     <div class="reply">
                         <div class="pfp">
@@ -66,11 +67,14 @@
                             <p>{{details}}</p>
                         </div>
                     </div>
-            {{/replies }}
-            <form class="reply-form" action="/user/{{../user.id}}/post/{{id}}/reply" method="POST">
-                <textarea class="replyBox" name="details" cols="49" rows="4" placeholder="Add your reply..."></textarea>
-                <input class="submitBtn" type="submit">
-        </form> 
+                    
+                {{/replies }}
+                <form class="reply-form" action="/user/{{../user.id}}/post/{{id}}/reply" method="POST">
+                    <textarea class="replyBox" name="details" cols="49" rows="4" placeholder="Add your reply..."></textarea>
+                    <input class="submitBtn" type="submit">
+                </form> 
+            </div>
+            
         </div>
         
         {{/posts}} 
