@@ -8,6 +8,10 @@
     margin: 75px auto;
 }
 
+.base {
+    color: #069FEB;
+}
+
 #kb-right-container {
     padding-left: 40px;
     width: 400px;
@@ -29,7 +33,7 @@
     margin-left: 5px;
 }
 
-#kb-login-form input[type="text"] {
+#kb-login-form input {
     width: 150px;
     border: none;
     padding: 5px 0px 5px 10px;
@@ -38,7 +42,7 @@
     box-shadow: 0 0 15px 3px rgba(0, 0, 0, 0.1), 0 0 6px 3px rgba(0, 0, 0, 0.05);
 }
 
-#kb-login-form input[type="submit"] {
+#kb-login-form button {
     text-align: center;
     padding: 1px 10px 3px 10px;
     height: 30px;
@@ -144,7 +148,7 @@
 }
 
 #kb-regis-form input[type="submit"]:hover {
-    color: mediumslateblue;
+    color: #069FEB;
     background-color: white;
-    border-color: mediumslateblue;
+    border-color: #069FEB;
 }

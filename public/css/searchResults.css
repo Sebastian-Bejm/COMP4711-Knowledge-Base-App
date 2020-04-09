@@ -198,11 +198,13 @@
     width: 100%;
 }
 .submitBtn{
-    background-color: rgb(0, 183, 255);
-    border-style: none;
+    padding: 7px 10px;
+    margin-top: 5px;
+    background-color: #069FEB;
+    border: none;
     color: white;
-    font-size: 100%;
-    float: right;
-    margin-top: 1%;
-    margin-right: 2%;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 0 15px 3px rgba(0, 0, 0, 0.1), 0 0 6px 3px rgba(0, 0, 0, 0.05);
 }
