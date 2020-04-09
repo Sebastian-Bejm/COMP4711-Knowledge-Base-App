@@ -4,7 +4,9 @@
 
     <!-- list of conversations on left -->
     <div class="message-list">
-        
+        {{#unless messages}}
+        <h3 class="error">You have no Messages!</h3>
+        {{/unless}}
         {{#messages}}
         <!-- one conversation to click on, and show the reply thread -->
         <div class="single-message" onclick="setViewMessage({{id}})">
@@ -31,7 +33,10 @@
         <div class="replies">
 
         </div>
-
+        <form class="message-reply-form" action="/user/${user.id}/message/${message.id}/reply" method="POST">
+            <textarea name="details" cols="130" rows="6" placeholder="Write a message..."></textarea>
+            <button type="submit">Send</button>
+        </form>
         
 
     </div><!-- end message-replies -->
@@ -47,20 +52,15 @@
 
     const setViewMessage = id => {
         let activeMessage = messagesData.find(message=>message.id == id);
-        //console.log(activeMessage);
         let messageReplies = document.querySelector(".replies");
         let firstMessage = createMessageNode(activeMessage);
         let replies = activeMessage.replies.map(reply => createMessageNode(reply)).join('');
-        let replyForm = createReplyForm(activeMessage);
-        messageReplies.innerHTML = firstMessage+replies;//messageRepliesHeader+
-        messageReplies.insertAdjacentHTML('afterend', replyForm);;
+        document.querySelector(".message-reply-form").setAttribute("action", `/user/${user.id}/message/${activeMessage.id}/reply`)
+        messageReplies.innerHTML = firstMessage+replies;
+        //messageReplies.insertAdjacentHTML('afterend', replyForm);;
     }
 
-    const messageRepliesHeader = `
-        <div class="message-date-posted">
-            <p>Date Messages Sent</p>
-        </div>
-    `;
+    
 
     const createMessageNode = message =>{
         return `

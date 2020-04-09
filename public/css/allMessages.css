@@ -63,14 +63,15 @@ body {
 .message-replies {
     position: relative;
     width: 75%;
-    height: 600px;
+    max-height: 600px;
     margin-left: 1%;
+    padding-bottom: 200px;
     border: 1px solid lightgray;
 }
 
 .replies {
     overflow-y: auto;
-    height: 500px
+    height: 400px
 }
 
 .message-date-posted {
@@ -110,22 +111,27 @@ body {
 .message-reply-form {
     width: 100%;
     text-align: right;
-    background-color: #f2f2f0;
+    position: absolute;
+    bottom: 0;
 }
 
 .message-reply-form textarea {
-    display: block;
-    resize: none;
-    float: left;
-    width: 99.3%;
-    height: auto;
+    width: 100%;
+    border: none;
+    box-sizing:border-box;
+    padding: 5px 0px 5px 10px;
+    margin: 10px auto;
+    border-radius: 5px;
+    box-shadow: 0 0 15px 3px rgba(0, 0, 0, 0.1), 0 0 6px 3px rgba(0, 0, 0, 0.05);
 }
 
-.message-reply-form input[type="submit"] {
-    padding: 5px;
+.message-reply-form button {
+    padding: 7px 30px;
+    background-color: #069FEB;
+    border: none;
     color: white;
-    background-color: mediumslateblue;
-    border-color: mediumslateblue;
-    text-align: center;
-    margin: 10px 40px 10px 0px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 0 15px 3px rgba(0, 0, 0, 0.1), 0 0 6px 3px rgba(0, 0, 0, 0.05);
 }
