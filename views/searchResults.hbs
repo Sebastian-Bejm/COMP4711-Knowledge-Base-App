@@ -1,32 +1,25 @@
 {{>header}}
 <!-- to show multiple search results based on search string -->
-<div id="search-results">
+<div id="search-results" class = "AllResult">
 
     <!-- shows a single result, replace placeholders as neccessary for a profile message -->
      {{#results }}
-        <div class="single-result">
-            <div class="pfp">
-                <!-- placeholder image, replace with params -->
-                <img src={{imageurl}}>
-            </div>
-            <div class="result">
-                <div class="msg-title">
-                    <p>{{heading}}</p>
-                </div>
-                <div class="topic">
-                    <p>{{category}}</p>
-                </div>
-                <div class="msg-desc">
-                    <p>{{details}}</p>
-                </div>
-                <div class="date-posted">
-                    <p>{{senddate}}</p>
-                </div>
-                <div class="num-replies">
-                    <!-- retrieve replies on click -->
-                    <button>{{replycount}} replies</button>
-                </div>
-            </div>
+        <div class="MyPost">
+            
+                <img class="MyImage" src={{imageurl}}>
+                <div class="MyContent">
+                    <div class="MyHCDiv">
+                        <p class="MyHeading">{{heading}}</p>
+                        <p class="MyCategory">{{category}}</p>
+                    </div>
+                
+                    <p class="MyDetail">{{details}}</p>
+
+                    <div class="MyTRDiv">
+                        <p class="MyDate">{{senddate}}</p>
+                        <p class="reply-count">{{replycount}} replies</p>
+                    </div>
+                
 
             <!-- show replies under result -->
             <div class="replies">
@@ -46,9 +39,10 @@
                     
             </div><!-- end replies -->
             <form class="reply-form" action="/user/{{../user.id}}/post/{{this.id}}/reply" method="POST">
-                <textarea name="details" cols="49" rows="4" placeholder="Add your reply..."></textarea>
-                <input type="submit">
+                <textarea class="textfield" name="details" cols="49" rows="4" placeholder="Add your reply..."></textarea>
+                <input class="submitBtn" type="submit">
             </form> 
+            </div>
         </div><!-- end single result -->      
     {{/results}}
     

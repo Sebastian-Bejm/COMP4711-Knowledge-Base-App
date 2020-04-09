@@ -1,7 +1,7 @@
 /** CSS for results shown, migrate to another file if neccessary later on */
 
-.single-result {
-    display: block;
+/* .single-result {
+    display: flex;
     margin-left: 30%;
     margin-right: 30%;
     margin-top: 10px;
@@ -10,6 +10,7 @@
     height: auto;
     padding: 4px;
 }
+
 
 .pfp {
     float: left;
@@ -95,15 +96,28 @@
 /** CSS for replies, migrate later */
 
 .replies {
-    margin-left: 10%;
-    margin-right: 10%;
 }
 
 .reply {
-    margin-top: 10px;
-    margin-bottom: 10px;
     display: flex;
+    margin-top: 5%;
+    margin-bottom: 5%;
 }
+.reply-count {
+    width: 30%;
+    cursor: pointer;
+    text-decoration: underline;
+    float: right;
+    font-weight: bold;
+    font-size: 1rem;
+}
+.reply-form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    margin-bottom: 10%;
+}
+
 
 .rep-pfp {
     display: inline-flex;
@@ -117,9 +131,78 @@
     border-width: 2px;
     border: 2px solid lightgray;
 }
+.AllResult{
+    margin-top: 10px;
+    width: 600px;
+    margin-left: 20%;
+    margin-right: 20%;
+    display: block;
+}
 
-.rep-msg {
-    text-align: center;
-    display: inline-block;
-    width: 81%;
+.rep-msg{
+    margin-left: 3%;
+    word-wrap: break-word;
+    width: 80%;
+}
+
+.MyPost {
+    display: flex;
+    margin: 5%, 5%, 5%, 5%;
+}
+.MyImage {
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    border: 2px solid lightgray;
+}
+.MyContent {
+    width: 100%
+}
+.MyHCDiv{
+    display: flex;
+    margin-left: 3%;
+}
+.MyCategory {
+    float: right;
+    border: solid;
+    border-color: skyblue;
+    border-width: 1px;
+    color: skyblue;
+    font-weight: bold;
+    margin: 1px 1px 1px 1px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+.MyHeading {
+    font-weight: bold;
+    font-size: 120%;
+    width: 90%;
+    margin: 1px 1px 1px 1px;
+}
+.MyDetail{
+    margin-left: 5%;
+    word-break: normal;
+
+}
+.MyTRDiv{
+    display: flex;
+}
+.MyDate{
+    margin-right: 15%;
+}
+.textfield{
+    border: solid;
+    border-radius: 10px;
+    border-width: 1.5px;
+    border-color: lightgray;
+    width: 100%;
+}
+.submitBtn{
+    background-color: rgb(0, 183, 255);
+    border-style: none;
+    color: white;
+    font-size: 100%;
+    float: right;
+    margin-top: 1%;
+    margin-right: 2%;
 }
