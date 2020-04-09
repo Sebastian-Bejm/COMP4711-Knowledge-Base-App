@@ -216,7 +216,7 @@ textarea {
     width: 30%;
     cursor: pointer;
     text-decoration: underline;
-    
+    float: right;
 }
 
 .reply {
@@ -320,6 +320,9 @@ textarea {
 }
 .MyTRDiv{
     display: flex;
+}
+.MyDate{
+    margin-right: 15%;
 }
 
 

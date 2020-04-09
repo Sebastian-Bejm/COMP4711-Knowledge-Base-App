@@ -150,11 +150,13 @@
             html += `
             <div class="post">
                 <a class="img-link" href="/user/${posts[i].user_id}"><img src=${posts[i].imageurl} class="img-post" /></a>
-                <div>
+                <div class="MyContent">
                     <p class="post-heading"><span class="post-subject">${posts[i].heading}</span><span class="category">${posts[i].category}</span></p>
-                    <p>${posts[i].details}</p>
-                    <p>${posts[i].senddate}</p>
+                    <p class="MyDetail">${posts[i].details}</p>
+                        <div class="MyTRDiv">
+                    <p class="MyDate">${posts[i].senddate}</p>
                     <p class="reply-count" onclick="toggleViewReplies(${posts[i].id})">${posts[i].replycount} replies</p>
+                        </div>
                     <div id="post-replies${posts[i].id}" class="replies">
                         ${replies}
                         <form class="reply-form" action="/user/${user.id}/post/${posts[i].id}/reply" method="POST">
@@ -165,6 +167,7 @@
                 </div>
             </div>
             `
+            
         }
         return html;
     }
@@ -177,7 +180,7 @@
                     <div class="reply-img">
                         <img src=${replies[i].imageurl} class="img-reply">
                     </div>
-                    <div class="reply-details">
+                    <div class="rep-msg">
                         <p>${replies[i].details}</p>
                     </div>
                 </div>   
